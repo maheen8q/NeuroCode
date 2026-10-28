@@ -1,42 +1,60 @@
-// Checks the T4 <-> T1 contract that fails silently if it drifts.
-// Run in CI. Each failure prints what to reconcile.
+// The T4 <-> T1 contract that fails silently if it drifts. Run from backend/ (reads src/ml/labels.json):
+//   ./test_ml_contract [path/to/labels.json]
+// Frozen: feature vector v2 (53 dims, tools/features.py) and the 12 labels in src/ml/labels.json.
 #include <algorithm>
+#include <fstream>
 #include <iostream>
-#include <set>
+#include <string>
+#include <vector>
+
+#include <nlohmann/json.hpp>
+
+#include "ml/FeatureExtractor.hpp"
 #include "ml/StubPredictor.hpp"
+
 using namespace nc;
 
-int main() {
+int main(int argc, char** argv) {
     int bad = 0;
+    auto fail = [&](const std::string& msg) { std::cerr << "FAIL " << msg << "\n"; ++bad; };
 
-    // 1. Feature count: IPredictor.hpp says 48, StubPredictor says 53, and the
-    //    real extractor must produce exactly the number the model was trained on.
+    // 1. Feature count: one number everywhere. features.py says 53.
+    constexpr int kFrozenFeatures = 53;
     StubPredictor sp(1);
-    const auto feats = sp.extractFeatures("{}", "{}");
-    if (kFeatureCount != StubPredictor::kFeatureDim || (int)feats.size() != kFeatureCount) {
-        std::cerr << "FAIL feature count: kFeatureCount=" << kFeatureCount
-                  << " StubPredictor::kFeatureDim=" << StubPredictor::kFeatureDim
-                  << " extractFeatures().size()=" << feats.size()
-                  << "  (must all match tools/features.py N_FEATURES)\n";
-        ++bad;
-    }
+    const auto stub_feats = sp.extractFeatures("{}", "{}");
+    if (kFeatureCount != kFrozenFeatures)
+        fail("IPredictor.hpp kFeatureCount=" + std::to_string(kFeatureCount) + ", frozen is 53 (T1 owns this constant)");
+    if (StubPredictor::kFeatureDim != kFrozenFeatures)
+        fail("StubPredictor::kFeatureDim=" + std::to_string(StubPredictor::kFeatureDim) + ", frozen is 53");
+    if (static_cast<int>(stub_feats.size()) != kFrozenFeatures)
+        fail("StubPredictor::extractFeatures().size()=" + std::to_string(stub_feats.size()));
+    if (kFeatureVectorLength != kFrozenFeatures)
+        fail("FeatureExtractor kFeatureVectorLength=" + std::to_string(kFeatureVectorLength));
+    if (static_cast<int>(computeFeatures(ast::Node{}).size()) != kFrozenFeatures)
+        fail("FeatureExtractor output length");
 
-    // 2. Labels vs docs/api-spec.md section 9 AlgorithmLabel (T2 mirrors that enum).
-    const std::set<std::string> spec = {
-        "brute_force_pair_search","binary_search","two_pointer","sliding_window","bfs","dfs",
-        "dp_1d","dp_2d","greedy_scan","sort_based","hashing","heap_based","linear_scan",
-        "prefix_sum","unknown"};
-    for (const auto& l : StubPredictor::labels())
-        if (!spec.count(l)) {
-            std::cerr << "FAIL label \"" << l << "\" is not in api-spec AlgorithmLabel\n";
-            ++bad;
+    // 2. Labels: exactly labels.json, same order (the order is the class index), and the 12 agreed names.
+    const std::vector<std::string> frozen = {
+        "binary_search", "brute_force_pair_search", "dp", "graph_traversal",
+        "greedy_scan", "hashing", "heap_based", "linear_search", "naive_recursion",
+        "sliding_window", "sorting_based", "two_pointer"};
+    if (StubPredictor::labels() != frozen) fail("StubPredictor::labels() differs from the 12 agreed labels");
+
+    const std::string path = argc > 1 ? argv[1] : "src/ml/labels.json";
+    std::ifstream in(path);
+    if (!in) {
+        fail("cannot open " + path);
+    } else {
+        try {
+            const auto file_labels = nlohmann::json::parse(in).at("labels").get<std::vector<std::string>>();
+            if (file_labels != frozen) fail(path + " differs from the 12 agreed labels");
+            if (file_labels != StubPredictor::labels()) fail(path + " differs from StubPredictor::labels()");
+        } catch (const std::exception& e) {
+            fail(path + ": " + e.what());
         }
-
-    // 3. Labels must be alphabetical and unique (labels.json order is the class index).
-    const auto& L = StubPredictor::labels();
-    if (!std::is_sorted(L.begin(), L.end()) || std::set<std::string>(L.begin(), L.end()).size() != L.size()) {
-        std::cerr << "FAIL labels not sorted/unique\n"; ++bad;
     }
+    // "unknown" is an API-level answer (api-spec section 9), never a class index.
+    if (std::find(frozen.begin(), frozen.end(), "unknown") != frozen.end()) fail("'unknown' must not be a class");
 
     if (bad == 0) std::cout << "ml contract OK\n";
     return bad ? 1 : 0;

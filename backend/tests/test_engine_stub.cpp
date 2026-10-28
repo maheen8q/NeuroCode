@@ -3,7 +3,7 @@
 #include <chrono>
 #include <iostream>
 #include <thread>
-//#include <nlohmann/json.hpp>
+#include <nlohmann/json.hpp>
 #include "engine/EngineStub.hpp"
 #include "ml/StubPredictor.hpp"
 #include "FakePredictor.hpp"
@@ -75,6 +75,18 @@ int main() {
         std::thread th([&] { r = e->analyze("c", spec, nullptr); });
         std::this_thread::sleep_for(150ms); e->cancel(); th.join();
         assert(!r.success && r.error == "cancelled");
+    }
+    { // the next job on the same engine still runs after a cancel
+        auto e = std::make_unique<EngineStub>(real, 200ms);
+        AnalysisResult r;
+        std::thread th([&] { r = e->analyze("c", spec, nullptr); });
+        std::this_thread::sleep_for(50ms); e->cancel(); th.join();
+        assert(!r.success && r.error == "cancelled");
+        assert(e->analyze("c", spec, nullptr).success);
+        // a cancel that lands before the job starts is not lost
+        e->cancel();
+        assert(e->analyze("c", spec, nullptr).error == "cancelled");
+        assert(e->optimize("c", spec, nullptr).success);
     }
     { // concurrent jobs sharing one predictor (T3 runs a pool)
         std::vector<std::thread> ts;

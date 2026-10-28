@@ -43,6 +43,13 @@ bool stepThrough(const std::vector<std::pair<int, std::string>>& steps,
     return true;
 }
 
+// Clears the cancel flag when a call returns, so an engine whose job was cancelled can run again.
+// A cancel() that arrives BEFORE the call starts is kept (the job was cancelled while queued).
+struct ClearCancelOnExit {
+    std::atomic<bool>& flag;
+    ~ClearCancelOnExit() { flag.store(false); }
+};
+
 } // namespace
 
 AnalysisResult EngineStub::fakeAnalysis(const std::string& code,
@@ -105,6 +112,7 @@ AnalysisResult EngineStub::fakeAnalysis(const std::string& code,
 AnalysisResult EngineStub::analyze(const std::string& code,
                                    const ProblemSpec& spec,
                                    ProgressFn on_progress) {
+    ClearCancelOnExit clear{cancelled_};
     AnalysisResult result = fakeAnalysis(code, spec, on_progress);
     if (result.success && on_progress) on_progress(100, "complete");
     return result;
@@ -113,6 +121,7 @@ AnalysisResult EngineStub::analyze(const std::string& code,
 OptimizeResult EngineStub::optimize(const std::string& code,
                                     const ProblemSpec& spec,
                                     ProgressFn on_progress) {
+    ClearCancelOnExit clear{cancelled_};
     OptimizeResult result;
     result.analysis = fakeAnalysis(code, spec, on_progress);
 

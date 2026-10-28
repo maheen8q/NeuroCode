@@ -5,7 +5,8 @@ For every sample .cpp, this runs
   1. nc_extract           (C++)    -> AST JSON
   2. tools/extract_ast.py (Python) -> AST JSON, on the SAME text (preamble + #line + code)
 and compares the two trees node for node, then runs tools/features.py on both and compares the
-feature vectors. A difference in either means the model would see different input in production
+feature vectors, and finally compares features.py's output against the C++ FeatureExtractor
+(`nc_extract --features`). A difference in either means the model would see different input in production
 than it trained on.
 
 Known, deliberate differences (see parse/AstBuilder.hpp) are normalised away before comparing:
@@ -26,6 +27,7 @@ def main():
     ap.add_argument("--nc-extract", required=True)
     ap.add_argument("--tools", default="tools")
     ap.add_argument("--samples", default="tests/fixtures/ast_samples")
+    ap.add_argument("--write-golden", help="write the Python feature vectors to this JSON file (tests/fixtures/features_golden.json)")
     ap.add_argument("--show", type=int, default=5, help="max differences to print per file")
     args = ap.parse_args()
 
@@ -40,6 +42,7 @@ def main():
         sys.exit(f"no samples in {args.samples}")
 
     bad = 0
+    golden = {"names": list(features.FEATURE_NAMES), "samples": {}}
     for path in files:
         name = os.path.basename(path)
         wrapped = subprocess.run([args.nc_extract, "--print-wrapped", path], capture_output=True, text=True, check=True).stdout
@@ -85,6 +88,16 @@ def main():
 
         v_py, v_cpp = features.extract(py_ast), features.extract(cpp_ast)
         feat_diffs = [(features.FEATURE_NAMES[i], a, b) for i, (a, b) in enumerate(zip(v_py, v_cpp)) if a != b]
+        # the C++ FeatureExtractor itself (not features.py run on the C++ AST) against features.py on the Python AST
+        nat = subprocess.run([args.nc_extract, "--features", path], capture_output=True, text=True)
+        if nat.returncode != 0:
+            feat_diffs.append(("<nc_extract --features failed>", nat.stderr.strip()[:100], ""))
+        else:
+            v_nat = json.loads(nat.stdout)
+            if len(v_nat) != len(v_py):
+                feat_diffs.append(("<length>", len(v_py), len(v_nat)))
+            feat_diffs += [(features.FEATURE_NAMES[i], a, b) for i, (a, b) in enumerate(zip(v_py, v_nat)) if a != b]
+        golden["samples"][name] = v_py
 
         if diffs or feat_diffs:
             bad += 1
@@ -97,6 +110,10 @@ def main():
             nodes = sum(1 for _ in features._walk(cpp_ast))
             print(f"ok   {name}: {nodes} nodes identical, {len(v_py)} features identical")
 
+    if args.write_golden and not bad:
+        with open(args.write_golden, "w") as f:
+            json.dump(golden, f, indent=1, sort_keys=True)
+        print("wrote", args.write_golden)
     print("ALL IDENTICAL" if not bad else f"{bad} of {len(files)} files differ")
     sys.exit(1 if bad else 0)
 
