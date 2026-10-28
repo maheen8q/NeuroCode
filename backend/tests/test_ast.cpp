@@ -1,7 +1,7 @@
 // AST extraction tests. Plain checks, no framework. Build from backend/:
 //   g++ -std=c++20 -I src -I $(llvm-config --includedir) src/engine/parse/*.cpp src/engine/ast/Serializer.cpp
 //       tests/test_ast.cpp -L$(llvm-config --libdir) -lclang -Wl,-rpath,$(llvm-config --libdir) -pthread -o test_ast
-// Run from backend/ (it reads tests/fixtures/). Tree-for-tree agreement with tools/extract_ast.py is
+// Run from backend/ (it reads tests/fixtures/ast_samples/). Tree-for-tree agreement with tools/extract_ast.py is
 // checked separately by tests/parity_ast.py.
 #include <atomic>
 #include <chrono>
@@ -48,7 +48,7 @@ static std::vector<const Node*> find(const Node& root, const std::string& type) 
 }
 
 int main() {
-    const std::string pair_sum = readFile("tests/fixtures/pair_sum_brute.cpp");
+    const std::string pair_sum = readFile("tests/fixtures/ast_samples/pair_sum_brute.cpp");
     CHECK(!pair_sum.empty());
 
     // --- 1. root, user-code filtering, user line numbers
