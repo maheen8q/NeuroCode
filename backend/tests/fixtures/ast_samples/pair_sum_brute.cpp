@@ -1,6 +1,3 @@
-#include <iostream>
-#include <vector>
-using namespace std;
 bool hasPair(vector<int>& a, int k) {
     int n = a.size();
     for (int i = 0; i < n; i++) {

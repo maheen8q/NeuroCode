@@ -12,8 +12,9 @@ namespace nc {
 // so T1's FeatureExtractor sees production-shaped input from day one.
 // Replaced by the real Engine in week 2; makeEngine() keeps its signature.
 //
-// Lifetime: create ONE engine per job. cancel() sets a flag that is never
-// reset, so a cancelled instance must not be reused.
+// Lifetime: create ONE engine per job (JobManager does). cancel() before analyze/optimize starts
+// makes that call return "cancelled" at once; the flag is cleared when the call returns, so the
+// same instance can run again afterwards.
 //
 // Test hooks (stub only): put one of these comments in the submitted code.
 //   // STUB:compile_error  -> failure, "COMPILE_ERROR: ..."
