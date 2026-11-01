@@ -87,7 +87,7 @@ void saveCheckpoint(MLP& model, const ModelInfo& info, const std::string& path_n
 
     std::time_t now = std::time(nullptr);
     char stamp[32];
-    std::strftime(stamp, sizeof stamp, "%Y-%m-%dT%H:%M:%S", std::localtime(&now));
+    std::strftime(stamp, sizeof stamp, "%Y-%m-%dT%H:%M:%SZ", std::gmtime(&now));
 
     nlohmann::json j;
     j["version"] = info.version;

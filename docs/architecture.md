@@ -169,8 +169,6 @@ neurocode/
     │   │   ├── Database.cpp/.hpp
     │   │   ├── UserRepo.cpp/.hpp
     │   │   ├── JobRepo.cpp/.hpp
-    │   │   ├── AnalysisRepo.cpp/.hpp
-    │   │   ├── ProblemRepo.cpp/.hpp
     │   │   └── ModelRepo.cpp/.hpp
     │   │
     │   ├── engine/                ══════ T4 ══════  deterministic analysis
