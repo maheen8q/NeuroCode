@@ -1,0 +1,39 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8080,
+    "http_threads": 2,
+    "cors_origin": "http://localhost:5173"
+  },
+  "db": {
+    "path": "data/neurocode.db",
+    "schema": "db/schema.sql",
+    "seed": "db/seed.sql"
+  },
+  "models_dir": "models",
+  "jobs": {
+    "worker_threads": 4,
+    "max_code_bytes": 65536,
+    "rate_limit_per_hour": 30
+  },
+  "auth": {
+    "mode": "stub",
+    "username": "demo",
+    "token": "dev-token-change-me",
+    "session_ttl_days": 7
+  },
+  "training_defaults": {
+    "epochs": 50,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "dataset": "default"
+  },
+  "sandbox": {
+    "cpu_seconds": 5,
+    "wall_ms": 5000,
+    "address_space_mb": 256,
+    "output_bytes": 1048576,
+    "benchmark_ms": 10000,
+    "run_as_uid": -1
+  }
+}
