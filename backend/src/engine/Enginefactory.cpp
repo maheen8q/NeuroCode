@@ -1,11 +1,11 @@
-#include "IEngine.hpp"
-#include "EngineStub.hpp"
+#include "engine/Engine.hpp"
+#include "engine/IEngine.hpp"
 
 namespace nc {
 
-// Week 2: return the real Engine here. Callers do not change.
+// The real engine. EngineStub stays in the tree for the API tests that rely on its STUB: hooks.
 std::unique_ptr<IEngine> makeEngine(IPredictor& predictor) {
-    return std::make_unique<EngineStub>(predictor);
+    return std::make_unique<Engine>(predictor);
 }
 
 } // namespace nc

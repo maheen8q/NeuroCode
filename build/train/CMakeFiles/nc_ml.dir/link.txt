@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnc_ml.a CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Dataset.cpp.o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Model.cpp.o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Metrics.cpp.o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Trainer.cpp.o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/StubPredictor.cpp.o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Predictor.cpp.o
+/usr/bin/ranlib libnc_ml.a

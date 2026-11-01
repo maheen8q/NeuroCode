@@ -1,0 +1,14 @@
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/nc_ml.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test_dataset.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test_standardize.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test_tensors.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test_model.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test_metrics.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test_train.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test_save.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test_predictor.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test_cv.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/nc_train.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/test.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/edit_cache.dir
+/mnt/c/Users/FAIZAN/NeuroCode/build/train/CMakeFiles/rebuild_cache.dir
