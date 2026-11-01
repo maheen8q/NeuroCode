@@ -471,12 +471,12 @@ All fields optional. Defaults come from `config.json`.
   "models": [
     {
       "id": 3,
-      "version": "v3-20260410",
-      "accuracy": 0.871,
-      "loss": 0.412,
-      "epochs": 50,
-      "dataset_size": 3240,
-      "trained_at": "2026-04-10T14:22:00Z",
+      "version": "v20261028-0013",
+      "cv_accuracy": 0.849,
+      "loss": null,
+      "epochs": 7,
+      "dataset_size": 2067,
+      "trained_at": "2026-10-28T00:14:01Z",
       "is_active": true
     }
   ]
@@ -487,21 +487,6 @@ All fields optional. Defaults come from `config.json`.
 
 Loads that checkpoint into the running predictor and flips `is_active`. 200 with the updated model object. 404 if the checkpoint file is missing.
 
-### `GET /models/{id}/metrics`
-
-```json
-{
-  "version": "v3-20260410",
-  "accuracy": 0.871,
-  "per_class": [
-    { "label": "binary_search", "precision": 0.91, "recall": 0.88, "support": 210 }
-  ],
-  "confusion_matrix": {
-    "labels": ["binary_search", "two_pointer"],
-    "matrix": [[185, 12], [9, 196]]
-  }
-}
-```
 
 This feeds the evaluation section of the report, so build it even if the UI does not display it.
 
@@ -535,7 +520,7 @@ type FindingType =
 
 type AlgorithmLabel =
 | "binary_search" | "brute_force_pair_search" | "dp"
-| "graph_traversal" | "greedy_scan" | "hashing
+| "graph_traversal" | "greedy_scan" | "hashing"
 | "heap_based" | "linear_search" | "naive_recursion"
 | "sliding_window" | "sorting_based" | "two_pointer" | "unknown";
 ```

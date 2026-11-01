@@ -169,8 +169,6 @@ neurocode/
     │   │   ├── Database.cpp/.hpp
     │   │   ├── UserRepo.cpp/.hpp
     │   │   ├── JobRepo.cpp/.hpp
-    │   │   ├── AnalysisRepo.cpp/.hpp
-    │   │   ├── ProblemRepo.cpp/.hpp
     │   │   └── ModelRepo.cpp/.hpp
     │   │
     │   ├── engine/                ══════ T4 ══════  deterministic analysis
@@ -477,7 +475,7 @@ CREATE TABLE models (
     id              INTEGER PRIMARY KEY,
     version         TEXT UNIQUE NOT NULL,     -- "v3-20260410"
     checkpoint_path TEXT NOT NULL,
-    accuracy        REAL, loss REAL,
+    cv_accuracy        REAL, loss REAL,
     epochs          INTEGER, dataset_size INTEGER,
     trained_at      TEXT DEFAULT CURRENT_TIMESTAMP,
     is_active       INTEGER DEFAULT 0
