@@ -394,93 +394,73 @@ The JSON contract. T2 hand-mirrors it into `frontend/src/types/api.d.ts`. If the
 ---
 See [erd.md](erd.md) for the diagram.
 
-## 6. Data model
+## 6. Database schema
 
-SQLite. Big artifacts (`.pt` checkpoints, datasets, compiled binaries) live on disk; only paths are stored.
+SQLite, one file at `data/neurocode.db`. Each job's full analysis result is
+stored as one JSON blob in `jobs.result_json` rather than spread across separate
+tables. `users` and `sessions` exist but are unused while auth is hardcoded.
 
 ```sql
-CREATE TABLE users (
+CREATE TABLE users (                          -- unused for now (hardcoded auth)
     id            INTEGER PRIMARY KEY,
     username      TEXT UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,             -- Argon2id
+    password_hash TEXT NOT NULL,
     created_at    TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE sessions (
+CREATE TABLE sessions (                        -- unused for now
     token      TEXT PRIMARY KEY,
     user_id    INTEGER NOT NULL REFERENCES users(id),
     expires_at TEXT NOT NULL
 );
 
-CREATE TABLE problems (                       -- seeded catalog
-    id             TEXT PRIMARY KEY,          -- "pair_sum"
+CREATE TABLE problems (                        -- seeded catalog
+    id             TEXT PRIMARY KEY,           -- "pair_sum"
     title          TEXT NOT NULL,
+    description    TEXT,                        -- shown in the UI
     input_type     TEXT, output_type TEXT, operation TEXT,
     max_n          INTEGER,
-    optimal_time   TEXT,                      -- "O(n)"
-    reference_code TEXT NOT NULL              -- oracle solution
+    optimal_time   TEXT,                        -- "O(n)"
+    reference_code TEXT NOT NULL                -- oracle solution (solve(...), unconfirmed w/ T4)
 );
 
 CREATE TABLE jobs (
-    id          INTEGER PRIMARY KEY,
-    user_id     INTEGER REFERENCES users(id),
-    type        TEXT CHECK(type IN ('analyze','optimize','train')),
-    status      TEXT CHECK(status IN ('queued','running','done','failed','cancelled')),
-    problem_id  TEXT REFERENCES problems(id),
-    problem_json TEXT,                        -- custom ProblemSpec
-    input_code  TEXT,
-    progress    INTEGER DEFAULT 0,
-    stage       TEXT,
-    error       TEXT,
-    created_at  TEXT DEFAULT CURRENT_TIMESTAMP,
-    finished_at TEXT
+    id           INTEGER PRIMARY KEY,
+    user_id      INTEGER REFERENCES users(id),
+    type         TEXT CHECK(type IN ('analyze','optimize','train')),
+    status       TEXT CHECK(status IN ('queued','running','done','failed','cancelled')),
+    problem_id   TEXT REFERENCES problems(id), -- FK to catalog
+    problem_json TEXT,                          -- custom ProblemSpec (if no catalog problem)
+    input_code   TEXT,
+    progress     INTEGER DEFAULT 0,
+    stage        TEXT,
+    result_json  TEXT,                          -- whole analysis result (algorithms, complexity,
+                                                --   findings, counterexamples, optimizations, ast, cfg)
+    error        TEXT,
+    created_at   TEXT DEFAULT CURRENT_TIMESTAMP,
+    finished_at  TEXT
 );
 CREATE INDEX idx_jobs_user ON jobs(user_id, created_at DESC);
 
-CREATE TABLE analyses (
-    id               INTEGER PRIMARY KEY,
-    job_id           INTEGER NOT NULL REFERENCES jobs(id),
-    algorithms_json  TEXT,                    -- ranked list
-    time_complexity  TEXT,
-    space_complexity TEXT,
-    derivation_json  TEXT,
-    ast_json         TEXT,
-    cfg_json         TEXT,
-    model_version    TEXT
-);
-
-CREATE TABLE findings (
-    id          INTEGER PRIMARY KEY,
-    analysis_id INTEGER NOT NULL REFERENCES analyses(id),
-    line        INTEGER, severity TEXT, type TEXT, message TEXT
-);
-
-CREATE TABLE counterexamples (
+CREATE TABLE models (                          -- cache of the .pt/.json files on disk
     id              INTEGER PRIMARY KEY,
-    analysis_id     INTEGER NOT NULL REFERENCES analyses(id),
-    input           TEXT, expected_output TEXT, actual_output TEXT
-);
-
-CREATE TABLE optimizations (
-    id               INTEGER PRIMARY KEY,
-    analysis_id      INTEGER NOT NULL REFERENCES analyses(id),
-    old_algorithm    TEXT, new_algorithm TEXT,
-    old_complexity   TEXT, new_complexity TEXT,
-    optimized_code   TEXT, reason TEXT,
-    verified         INTEGER DEFAULT 0,
-    before_ms REAL, after_ms REAL, before_kb INTEGER, after_kb INTEGER, n_used INTEGER
-);
-
-CREATE TABLE models (
-    id              INTEGER PRIMARY KEY,
-    version         TEXT UNIQUE NOT NULL,     -- "v3-20260410"
+    version         TEXT UNIQUE NOT NULL,       -- "v20261028-0013"
     checkpoint_path TEXT NOT NULL,
-    cv_accuracy        REAL, loss REAL,
+    accuracy        REAL, loss REAL,            -- loss may be null (not written to sidecar)
     epochs          INTEGER, dataset_size INTEGER,
     trained_at      TEXT DEFAULT CURRENT_TIMESTAMP,
-    is_active       INTEGER DEFAULT 0
+    is_active       INTEGER DEFAULT 0           -- active = newest checkpoint (filename sort)
 );
 ```
+
+**Changed from the previous version**
+- Added `jobs.result_json` and `problems.description`.
+- Dropped `analyses`, `findings`, `counterexamples`, `optimizations`; their
+  contents now live inside `jobs.result_json`.
+- `jobs.problem_id` foreign key to `problems(id)` restored.
+- `models` is now a read-only cache synced from the models folder, not a source
+  of truth. `is_active` tracks the newest checkpoint by filename.
+- `users` and `sessions` kept but unused until real auth lands.
 
 ---
 
