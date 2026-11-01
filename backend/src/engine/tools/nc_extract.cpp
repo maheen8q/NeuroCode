@@ -3,6 +3,7 @@
 //   nc_extract --print-wrapped file.cpp the exact text handed to libclang (preamble + #line + code)
 //   nc_extract --features file.cpp      the 53-feature vector as a JSON array (C++ FeatureExtractor)
 //   nc_extract --strict file.cpp        exit 1 if libclang reports errors
+//   nc_extract --strip ...              run IoStripper first (what the feature path does for contest code)
 // Diagnostics go to stderr. Used by tests/parity_ast.py to compare against the Python extractor.
 #include <fstream>
 #include <iostream>
@@ -10,25 +11,28 @@
 #include <string>
 
 #include "engine/ast/Serializer.hpp"
+#include "engine/parse/IoStripper.hpp"
 #include "ml/FeatureExtractor.hpp"
 #include "engine/parse/AstBuilder.hpp"
 #include "engine/parse/ClangFrontend.hpp"
 
 int main(int argc, char** argv) {
-    bool strict = false, print_wrapped = false, features = false;
+    bool strict = false, print_wrapped = false, features = false, strip = false;
     std::string path;
     for (int i = 1; i < argc; ++i) {
         const std::string a = argv[i];
         if (a == "--strict") strict = true;
         else if (a == "--print-wrapped") print_wrapped = true;
         else if (a == "--features") features = true;
+        else if (a == "--strip") strip = true;
         else path = a;
     }
-    if (path.empty()) { std::cerr << "usage: nc_extract [--strict] [--print-wrapped] [--features] file.cpp\n"; return 2; }
+    if (path.empty()) { std::cerr << "usage: nc_extract [--strict] [--print-wrapped] [--features] [--strip] file.cpp\n"; return 2; }
 
     std::ifstream in(path, std::ios::binary);
     if (!in) { std::cerr << "cannot read " << path << "\n"; return 2; }
-    const std::string code((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+    std::string code((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+    if (strip) code = nc::parse::stripIoCode(code);
 
     if (print_wrapped) { std::cout << nc::parse::wrapForParse(code); return 0; }
 

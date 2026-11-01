@@ -1,0 +1,98 @@
+[
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Dataset.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Dataset.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Dataset.cpp",
+  "output": "CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Dataset.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Model.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Model.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Model.cpp",
+  "output": "CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Model.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Metrics.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Metrics.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Metrics.cpp",
+  "output": "CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Metrics.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Trainer.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Trainer.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Trainer.cpp",
+  "output": "CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Trainer.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/StubPredictor.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/StubPredictor.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/StubPredictor.cpp",
+  "output": "CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/StubPredictor.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Predictor.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Predictor.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Predictor.cpp",
+  "output": "CMakeFiles/nc_ml.dir/mnt/c/Users/FAIZAN/NeuroCode/backend/src/ml/Predictor.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/test_dataset.dir/test_dataset.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_dataset.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_dataset.cpp",
+  "output": "CMakeFiles/test_dataset.dir/test_dataset.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/test_standardize.dir/test_standardize.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_standardize.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_standardize.cpp",
+  "output": "CMakeFiles/test_standardize.dir/test_standardize.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/test_tensors.dir/test_tensors.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_tensors.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_tensors.cpp",
+  "output": "CMakeFiles/test_tensors.dir/test_tensors.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/test_model.dir/test_model.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_model.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_model.cpp",
+  "output": "CMakeFiles/test_model.dir/test_model.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/test_metrics.dir/test_metrics.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_metrics.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_metrics.cpp",
+  "output": "CMakeFiles/test_metrics.dir/test_metrics.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/test_train.dir/test_train.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_train.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_train.cpp",
+  "output": "CMakeFiles/test_train.dir/test_train.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/test_save.dir/test_save.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_save.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_save.cpp",
+  "output": "CMakeFiles/test_save.dir/test_save.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/test_predictor.dir/test_predictor.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_predictor.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_predictor.cpp",
+  "output": "CMakeFiles/test_predictor.dir/test_predictor.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/test_cv.dir/test_cv.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_cv.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/test_cv.cpp",
+  "output": "CMakeFiles/test_cv.dir/test_cv.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/FAIZAN/NeuroCode/build/train",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/../../src -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include -isystem /home/anshrah/.venvs/neurocode/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/nc_train.dir/train_main.cpp.o -c /mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/train_main.cpp",
+  "file": "/mnt/c/Users/FAIZAN/NeuroCode/backend/tools/train/train_main.cpp",
+  "output": "CMakeFiles/nc_train.dir/train_main.cpp.o"
+}
+]

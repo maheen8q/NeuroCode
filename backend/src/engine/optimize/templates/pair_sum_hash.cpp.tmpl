@@ -1,0 +1,11 @@
+// Replaces an O(n^2) pair search with an O(n) hash pass.
+#include <unordered_map>
+#include <vector>
+bool hasPair(const std::vector<int>& {{ARR}}, int {{TARGET}}) {
+    std::unordered_map<int, bool> seen;
+    for (int x : {{ARR}}) {
+        if (seen.count({{TARGET}} - x)) return true;
+        seen[x] = true;
+    }
+    return false;
+}
