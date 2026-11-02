@@ -28,3 +28,8 @@ backend/tools/train/build/
 backend/models/
 backend/tools/train/build/
 backend/models/
+build/
+backend/build/
+*.db
+*.db-shm
+*.db-wal
