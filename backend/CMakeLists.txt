@@ -40,7 +40,8 @@ if(NC_BUILD_SERVER)
   file(GLOB_RECURSE NC_APP_SOURCES CONFIGURE_DEPENDS
        src/api/*.cpp src/services/*.cpp src/common/*.cpp
        src/ml/*.cpp src/engine/*.cpp src/sandbox/*.cpp)
-
+  # These are standalone command-line tools with their own main(); keep them out of the server.
+  list(FILTER NC_APP_SOURCES EXCLUDE REGEX "src/engine/tools/")
   add_executable(neurocode src/main.cpp ${NC_APP_SOURCES})
   target_include_directories(neurocode PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
   target_link_libraries(neurocode PRIVATE nc_storage Drogon::Drogon "${TORCH_LIBRARIES}")

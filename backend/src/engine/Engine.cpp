@@ -523,13 +523,14 @@ struct Verified {
 // Compiles the candidate and runs the generated tests against it. True only if it builds and EVERY test passes.
 bool verifyCandidate(const Ctx& c, Job& job, const optimize::OptimizationResult& r, size_t index, Verified& v) {
     v.code = stripIncludes(r.rewrittenCode);
-    if (v.code.empty()) return false;
+    if (v.code.empty()) { std::fprintf(stderr, "VC: empty code\n"); return false; }
     std::string error;
-    if (!parseToAst(c, v.code, v.ast, error)) return false;
+    if (!parseToAst(c, v.code, v.ast, error)) { std::fprintf(stderr, "VC: parse failed: %s\n", error.c_str()); return false; }
     v.build = buildProgram(c, job, v.ast, v.code, "opt" + std::to_string(index));
-    if (v.build.status != Build::Status::ok) return false;
+    if (v.build.status != Build::Status::ok) { std::fprintf(stderr, "VC: build not ok, status=%d msg=%s\n", (int)v.build.status, v.build.message.c_str()); return false; }
     const DiffReport report = differentialTest(c, job, v.build.binary, 1, false);
     v.tests = report.tests_run;
+    std::fprintf(stderr, "VC: tests_run=%d failed=%d sandbox_err=%s\n", report.tests_run, report.failed, report.sandbox_error.c_str());
     if (c.stop() || !report.sandbox_error.empty() || report.failed > 0 || report.tests_run == 0) return false;
     v.rule = &r;
     return true;

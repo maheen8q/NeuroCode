@@ -18,6 +18,10 @@
 #include "storage/JobRepo.hpp"
 #include "storage/ModelRepo.hpp"
 #include "storage/UserRepo.hpp"
+#include "common/AppContext.hpp"
+#include "engine/IEngine.hpp"          // makeEngine
+#include "services/JobManager.hpp"
+#include "services/ProgressBroadcaster.hpp"
 
 using json = nlohmann::json;
 
@@ -80,6 +84,21 @@ int main(int argc, char** argv) {
         //    (newest .pt). If the predictor had to fall back to an older checkpoint, follow it.
         int n_models = models.syncFromDisk(models_dir);
         auto predictor = nc::makePredictor(models_dir);
+        // Wire the job pipeline into the shared context the controllers read.
+        nc::ProgressBroadcaster broadcaster;   // check its constructor; may need args (see note)
+
+        auto engineFactory = [&predictor]() -> std::shared_ptr<nc::IEngine> {
+            return nc::makeEngine(*predictor);
+        };
+
+        nc::JobManager manager(
+            engineFactory,
+            server.value("job_workers", 2),        // config key, falls back to 2
+            server.value("job_history", 100),      // keep last 100 finished jobs
+            broadcaster);
+
+        nc::ctx().jobs = &manager;
+        nc::ctx().broadcaster = &broadcaster;
         const std::string loaded_version = predictor->activeModelVersion();
         if (!loaded_version.empty()) models.setActiveVersion(loaded_version);   // false for the stub: ignored
         const bool model_loaded = !loaded_version.empty() && models.findByVersion(loaded_version).has_value();

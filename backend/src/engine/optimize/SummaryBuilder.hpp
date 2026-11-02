@@ -9,7 +9,7 @@ class SummaryBuilder {
 public:
     // templatesDir defaults to the folder next to the binary's working dir.
     // Run binaries from backend/, matching the rest of the project.
-    explicit SummaryBuilder(std::string templatesDir = "src/engine/optimize/Templates");
+    explicit SummaryBuilder(std::string templatesDir = "src/engine/optimize/templates");
 
     // Reads <templatesDir>/<fileName>, replaces every {{arr}} -> arr value.
     // Unknown tokens are left as-is. Missing file returns "".

@@ -1,0 +1,356 @@
+[
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++  -I/home/hack3r/NeuroCode/backend/src -O3 -DNDEBUG -std=c++20 -Wall -Wextra -o CMakeFiles/nc_storage.dir/src/storage/Database.cpp.o -c /home/hack3r/NeuroCode/backend/src/storage/Database.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/storage/Database.cpp",
+  "output": "CMakeFiles/nc_storage.dir/src/storage/Database.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++  -I/home/hack3r/NeuroCode/backend/src -O3 -DNDEBUG -std=c++20 -Wall -Wextra -o CMakeFiles/nc_storage.dir/src/storage/JobRepo.cpp.o -c /home/hack3r/NeuroCode/backend/src/storage/JobRepo.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/storage/JobRepo.cpp",
+  "output": "CMakeFiles/nc_storage.dir/src/storage/JobRepo.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++  -I/home/hack3r/NeuroCode/backend/src -O3 -DNDEBUG -std=c++20 -Wall -Wextra -o CMakeFiles/nc_storage.dir/src/storage/ModelRepo.cpp.o -c /home/hack3r/NeuroCode/backend/src/storage/ModelRepo.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/storage/ModelRepo.cpp",
+  "output": "CMakeFiles/nc_storage.dir/src/storage/ModelRepo.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++  -I/home/hack3r/NeuroCode/backend/src -O3 -DNDEBUG -std=c++20 -Wall -Wextra -o CMakeFiles/nc_storage.dir/src/storage/UserRepo.cpp.o -c /home/hack3r/NeuroCode/backend/src/storage/UserRepo.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/storage/UserRepo.cpp",
+  "output": "CMakeFiles/nc_storage.dir/src/storage/UserRepo.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/main.cpp.o -c /home/hack3r/NeuroCode/backend/src/main.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/main.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/api/AuthController.cpp.o -c /home/hack3r/NeuroCode/backend/src/api/AuthController.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/api/AuthController.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/api/AuthController.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/api/ExecuteController.cpp.o -c /home/hack3r/NeuroCode/backend/src/api/ExecuteController.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/api/ExecuteController.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/api/ExecuteController.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/api/HealthController.cpp.o -c /home/hack3r/NeuroCode/backend/src/api/HealthController.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/api/HealthController.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/api/HealthController.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/api/JobController.cpp.o -c /home/hack3r/NeuroCode/backend/src/api/JobController.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/api/JobController.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/api/JobController.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/api/Middleware.cpp.o -c /home/hack3r/NeuroCode/backend/src/api/Middleware.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/api/Middleware.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/api/Middleware.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/api/ModelController.cpp.o -c /home/hack3r/NeuroCode/backend/src/api/ModelController.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/api/ModelController.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/api/ModelController.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/api/ProblemController.cpp.o -c /home/hack3r/NeuroCode/backend/src/api/ProblemController.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/api/ProblemController.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/api/ProblemController.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/api/ProgressSocket.cpp.o -c /home/hack3r/NeuroCode/backend/src/api/ProgressSocket.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/api/ProgressSocket.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/api/ProgressSocket.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/Engine.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/Engine.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/Engine.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/Engine.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/EngineStub.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/EngineStub.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/EngineStub.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/EngineStub.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/Enginefactory.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/Enginefactory.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/Enginefactory.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/Enginefactory.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/ast/Serializer.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/ast/Serializer.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/ast/Serializer.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/ast/Serializer.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/ast/Traversal.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/ast/Traversal.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/ast/Traversal.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/ast/Traversal.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/cfg/CfgBuilder.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/cfg/CfgBuilder.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/cfg/CfgBuilder.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/cfg/CfgBuilder.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/cfg/Dominators.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/cfg/Dominators.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/cfg/Dominators.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/cfg/Dominators.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/cfg/Reachability.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/cfg/Reachability.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/cfg/Reachability.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/cfg/Reachability.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/checks/StaticChecks.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/checks/StaticChecks.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/checks/StaticChecks.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/checks/StaticChecks.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/checks/rules/ArithmeticRules.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/checks/rules/ArithmeticRules.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/checks/rules/ArithmeticRules.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/checks/rules/ArithmeticRules.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/checks/rules/ControlFlowRules.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/checks/rules/ControlFlowRules.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/checks/rules/ControlFlowRules.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/checks/rules/ControlFlowRules.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/checks/rules/MemoryRules.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/checks/rules/MemoryRules.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/checks/rules/MemoryRules.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/checks/rules/MemoryRules.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/checks/rules/Rule.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/checks/rules/Rule.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/checks/rules/Rule.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/checks/rules/Rule.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/checks/rules/SuspiciousCodeRules.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/checks/rules/SuspiciousCodeRules.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/checks/rules/SuspiciousCodeRules.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/checks/rules/SuspiciousCodeRules.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/complexity/LoopAnalyzer.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/complexity/LoopAnalyzer.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/complexity/LoopAnalyzer.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/complexity/LoopAnalyzer.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/complexity/RecurrenceSolver.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/complexity/RecurrenceSolver.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/complexity/RecurrenceSolver.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/complexity/RecurrenceSolver.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/complexity/SpaceComplexity.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/complexity/SpaceComplexity.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/complexity/SpaceComplexity.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/complexity/SpaceComplexity.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/complexity/TimeComplexity.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/complexity/TimeComplexity.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/complexity/TimeComplexity.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/complexity/TimeComplexity.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/optimize/Catalog.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/optimize/Catalog.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/optimize/Catalog.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/optimize/Catalog.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/optimize/SummaryBuilder.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/optimize/SummaryBuilder.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/optimize/SummaryBuilder.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/optimize/SummaryBuilder.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/optimize/passes/LinearToBinarySearch.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/optimize/passes/LinearToBinarySearch.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/optimize/passes/LinearToBinarySearch.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/optimize/passes/LinearToBinarySearch.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/optimize/passes/PairSumToHash.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/optimize/passes/PairSumToHash.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/optimize/passes/PairSumToHash.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/optimize/passes/PairSumToHash.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/parse/AstBuilder.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/parse/AstBuilder.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/parse/AstBuilder.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/parse/AstBuilder.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/parse/ClangFrontend.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/parse/ClangFrontend.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/parse/ClangFrontend.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/parse/ClangFrontend.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/parse/IoStripper.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/parse/IoStripper.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/parse/IoStripper.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/parse/IoStripper.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/verify/Benchmark.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/verify/Benchmark.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/verify/Benchmark.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/verify/Benchmark.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/verify/Oracle.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/verify/Oracle.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/verify/Oracle.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/verify/Oracle.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/engine/verify/TestGenerator.cpp.o -c /home/hack3r/NeuroCode/backend/src/engine/verify/TestGenerator.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/engine/verify/TestGenerator.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/engine/verify/TestGenerator.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/ml/Dataset.cpp.o -c /home/hack3r/NeuroCode/backend/src/ml/Dataset.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/ml/Dataset.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/ml/Dataset.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/ml/FeatureExtractor.cpp.o -c /home/hack3r/NeuroCode/backend/src/ml/FeatureExtractor.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/ml/FeatureExtractor.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/ml/FeatureExtractor.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/ml/Metrics.cpp.o -c /home/hack3r/NeuroCode/backend/src/ml/Metrics.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/ml/Metrics.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/ml/Metrics.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/ml/Model.cpp.o -c /home/hack3r/NeuroCode/backend/src/ml/Model.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/ml/Model.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/ml/Model.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/ml/Predictor.cpp.o -c /home/hack3r/NeuroCode/backend/src/ml/Predictor.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/ml/Predictor.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/ml/Predictor.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/ml/StubPredictor.cpp.o -c /home/hack3r/NeuroCode/backend/src/ml/StubPredictor.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/ml/StubPredictor.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/ml/StubPredictor.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/ml/Trainer.cpp.o -c /home/hack3r/NeuroCode/backend/src/ml/Trainer.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/ml/Trainer.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/ml/Trainer.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/sandbox/Compiler.cpp.o -c /home/hack3r/NeuroCode/backend/src/sandbox/Compiler.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/sandbox/Compiler.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/sandbox/Compiler.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/sandbox/Limits.cpp.o -c /home/hack3r/NeuroCode/backend/src/sandbox/Limits.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/sandbox/Limits.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/sandbox/Limits.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/sandbox/Runner.cpp.o -c /home/hack3r/NeuroCode/backend/src/sandbox/Runner.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/sandbox/Runner.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/sandbox/Runner.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/services/AuthService.cpp.o -c /home/hack3r/NeuroCode/backend/src/services/AuthService.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/services/AuthService.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/services/AuthService.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/services/CodeExecutor.cpp.o -c /home/hack3r/NeuroCode/backend/src/services/CodeExecutor.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/services/CodeExecutor.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/services/CodeExecutor.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/services/JobManager.cpp.o -c /home/hack3r/NeuroCode/backend/src/services/JobManager.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/services/JobManager.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/services/JobManager.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/services/ModelService.cpp.o -c /home/hack3r/NeuroCode/backend/src/services/ModelService.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/services/ModelService.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/services/ModelService.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/services/ProblemCatalog.cpp.o -c /home/hack3r/NeuroCode/backend/src/services/ProblemCatalog.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/services/ProblemCatalog.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/services/ProblemCatalog.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/services/ProgressBroadcaster.cpp.o -c /home/hack3r/NeuroCode/backend/src/services/ProgressBroadcaster.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/services/ProgressBroadcaster.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/services/ProgressBroadcaster.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/hack3r/NeuroCode/backend/src -I/usr/lib/llvm-18/include -isystem /usr/include/jsoncpp -isystem /home/hack3r/libs/libtorch/include -isystem /home/hack3r/libs/libtorch/include/torch/csrc/api/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/neurocode.dir/src/services/StubTrainer.cpp.o -c /home/hack3r/NeuroCode/backend/src/services/StubTrainer.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/src/services/StubTrainer.cpp",
+  "output": "CMakeFiles/neurocode.dir/src/services/StubTrainer.cpp.o"
+},
+{
+  "directory": "/home/hack3r/NeuroCode/backend/build",
+  "command": "/usr/bin/c++ -DNC_DB_DIR=\\\"/home/hack3r/NeuroCode/backend/db\\\" -I/home/hack3r/NeuroCode/backend/src -O3 -DNDEBUG -std=c++20 -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/test_storage.dir/tests/test_storage.cpp.o -c /home/hack3r/NeuroCode/backend/tests/test_storage.cpp",
+  "file": "/home/hack3r/NeuroCode/backend/tests/test_storage.cpp",
+  "output": "CMakeFiles/test_storage.dir/tests/test_storage.cpp.o"
+}
+]
