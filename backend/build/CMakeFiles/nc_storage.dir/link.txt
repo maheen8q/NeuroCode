@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnc_storage.a CMakeFiles/nc_storage.dir/src/storage/Database.cpp.o CMakeFiles/nc_storage.dir/src/storage/JobRepo.cpp.o CMakeFiles/nc_storage.dir/src/storage/ModelRepo.cpp.o CMakeFiles/nc_storage.dir/src/storage/UserRepo.cpp.o
+/usr/bin/ranlib libnc_storage.a
