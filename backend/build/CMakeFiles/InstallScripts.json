@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/hack3r/NeuroCode/backend/build/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

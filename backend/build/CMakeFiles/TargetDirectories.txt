@@ -1,6 +1,0 @@
-/home/hack3r/NeuroCode/backend/build/CMakeFiles/nc_storage.dir
-/home/hack3r/NeuroCode/backend/build/CMakeFiles/neurocode.dir
-/home/hack3r/NeuroCode/backend/build/CMakeFiles/test_storage.dir
-/home/hack3r/NeuroCode/backend/build/CMakeFiles/test.dir
-/home/hack3r/NeuroCode/backend/build/CMakeFiles/edit_cache.dir
-/home/hack3r/NeuroCode/backend/build/CMakeFiles/rebuild_cache.dir
