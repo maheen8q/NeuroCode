@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 244 245 250; --panel: 255 255 255; --raised: 238 240 247; --line: 218 222 235;
+  --ink: 19 25 44; --mute: 98 108 134; --accent: 72 86 232;
+  --ok: 16 150 104; --warn: 190 118 8; --bad: 205 58 58;
+}
+.dark {
+  --bg: 14 19 34; --panel: 21 28 48; --raised: 30 39 66; --line: 44 55 86;
+  --ink: 230 234 246; --mute: 140 151 183; --accent: 122 137 255;
+  --ok: 52 211 153; --warn: 245 181 68; --bad: 248 113 113;
+}
+
+@layer base {
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; }
+  body { @apply bg-bg font-sans text-ink antialiased; font-size: 15px; line-height: 1.55; }
+  h1, h2, h3 { @apply font-display; letter-spacing: -0.01em; }
+  :focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 2px; border-radius: 6px; }
+  ::selection { background: rgb(var(--accent) / .3); }
+  * { scrollbar-width: thin; scrollbar-color: rgb(var(--line)) transparent; }
+}
+@layer components {
+  .field { @apply w-full rounded-lg border border-line bg-raised px-3 py-2 text-sm text-ink placeholder:text-mute focus:border-accent focus:outline-none; }
+  .label { @apply mb-1.5 block text-sm font-medium text-ink; }
+  .hint { @apply mt-1 text-xs text-mute; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Intro animation (src/components/intro/Intro.tsx) ---------- */
+.intro { --ia: #4856e8; background: #fbfbfd; color: #111114; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+.intro-scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  animation: introIn .5s ease-out both, introOut .45s ease-in calc(var(--ms) - 450ms) both; }
+.intro-abs { position: absolute; white-space: nowrap; }
+.intro-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.intro-big { font-size: clamp(2.3rem, 6vw, 4.6rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.06; }
+.intro-h2 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); font-weight: 700; letter-spacing: -0.03em; }
+.intro-mid { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 500; transition: opacity .6s, filter .6s; }
+.intro-word { font-size: clamp(2.6rem, 7vw, 4.6rem); font-weight: 700; letter-spacing: -0.04em; display: flex; align-items: center; gap: 14px;
+  opacity: 0; filter: blur(16px); transform: scale(.96); transition: opacity .7s .1s, filter .7s .1s, transform .7s .1s; }
+.intro-here { opacity: 1; filter: blur(0); transform: none; }
+.intro-gone { opacity: 0; filter: blur(14px); }
+.intro-word-sm { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; display: flex; align-items: center; gap: 8px; }
+.intro-pill { font-style: normal; font-size: .3em; font-weight: 600; letter-spacing: 0; padding: .3em .8em; border-radius: 999px; background: #eceeff; color: var(--ia); }
+.intro-word-sm .intro-pill { font-size: 11px; }
+.intro-acc { color: var(--ia); }
+.intro-grey { color: #9b9ba3; }
+.intro-w { margin-right: .28em; }
+.intro-blur { display: inline-block; animation: blurIn .65s cubic-bezier(.2, .7, .2, 1) both; }
+li.intro-blur { display: flex; }
+.intro-caret { display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: text-bottom; background: #111114; animation: caret 1s steps(1) infinite; }
+.intro-card { background: #fff; color: #111114; border: 1px solid #e8e8ee; border-radius: 22px; overflow: hidden;
+  box-shadow: 0 40px 70px -28px rgba(24, 24, 60, .22), 0 2px 8px rgba(24, 24, 60, .05); transition: opacity .7s, filter .7s, transform .7s; }
+.intro-tilt { animation: flyIn 1s cubic-bezier(.2, .8, .2, 1) both; transform: perspective(1400px) rotateX(14deg) rotateY(-18deg) rotateZ(5deg); }
+.intro-tilt-r { animation: flyInR 1s .15s cubic-bezier(.2, .8, .2, 1) both; transform: perspective(1400px) rotateX(8deg) rotateY(14deg) rotateZ(-4deg); }
+.intro-pop { animation: pop .7s cubic-bezier(.2, .8, .2, 1) both; }
+.intro-dim { opacity: .3; filter: blur(5px); transform: scale(.96); }
+.intro-ln { color: #b4b4bb; }
+.intro-label { text-align: center; font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+.intro-cam { transition: transform 1s cubic-bezier(.6, 0, .2, 1); }
+.intro-chip { font-weight: 500; background: #f1f1f5; padding: 1px 6px; border-radius: 5px; color: #555; }
+.intro-dot { width: 7px; height: 7px; border-radius: 50%; background: #b4b4bb; }
+.intro-run { width: 30px; height: 30px; border-radius: 50%; background: #17171c; color: #fff; display: flex; align-items: center; justify-content: center; }
+.intro-press { animation: press .8s ease both; }
+.intro-result { overflow: hidden; border-top: 1px solid #eeeef2; padding: 0 20px; transition: max-height .6s ease, opacity .6s ease, padding .6s ease; }
+.intro-result[style*="80px"] { padding: 14px 20px; }
+.intro-ok { display: inline-flex; align-items: center; gap: 4px; color: #1f8f4f; font-weight: 600; }
+.t-inc { color: #15803d; } .t-kw { color: #c2410c; font-weight: 600; } .t-ty { color: #c2410c; } .t-num { color: #0e7490; }
+.intro-skip { position: absolute; top: 20px; right: 24px; font-size: 13px; color: #8a8a92; padding: 6px 12px; border-radius: 999px; }
+.intro-skip:hover { background: #eeeef2; color: #111114; }
+.intro-progress { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--ia); animation: prog linear both; }
+@keyframes introIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes introOut { to { opacity: 0; filter: blur(8px); } }
+@keyframes blurIn { from { opacity: 0; filter: blur(14px); transform: translateY(10px); } to { opacity: 1; filter: blur(0); transform: none; } }
+@keyframes caret { 50% { opacity: 0; } }
+@keyframes pop { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes flyIn { from { opacity: 0; transform: perspective(1400px) translate3d(140px, 180px, -260px) rotateX(36deg) rotateY(-30deg) rotateZ(10deg); }
+  to { opacity: 1; transform: perspective(1400px) rotateX(14deg) rotateY(-18deg) rotateZ(5deg); } }
+@keyframes flyInR { from { opacity: 0; transform: perspective(1400px) translate3d(-120px, 160px, -240px) rotateX(30deg) rotateY(30deg) rotateZ(-10deg); }
+  to { opacity: 1; transform: perspective(1400px) rotateX(8deg) rotateY(14deg) rotateZ(-4deg); } }
+@keyframes press { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(72, 86, 232, .5); } 35% { transform: scale(.82); } 100% { transform: scale(1); box-shadow: 0 0 0 16px rgba(72, 86, 232, 0); } }
+@keyframes prog { from { width: 0; } to { width: 100%; } }
