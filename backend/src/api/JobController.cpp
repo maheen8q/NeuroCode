@@ -40,13 +40,33 @@ void JobController::create(const drogon::HttpRequestPtr& req, Callback&& cb) con
                                 "code is larger than " + std::to_string(c.maxCodeBytes) + " bytes"));
     }
 
-    auto probIt = body.find("problem");
-    if (probIt == body.end()) {
+        auto probIt = body.find("problem");
+    auto problemIdIt = body.find("problem_id");
+
+    nlohmann::json problemJson;
+    if (probIt != body.end() && !probIt->is_null()) {
+        // Custom mode: the full spec is given inline.
+        problemJson = *probIt;
+    } else if (problemIdIt != body.end() && problemIdIt->is_string()) {
+        // Catalog mode: only an id is given, look the rest up.
+        if (!c.problems) {
+            return cb(errorResponse(ErrorCode::Internal, "problem catalog not ready"));
+        }
+        const std::string pid = problemIdIt->get<std::string>();
+        const nc::Problem* p = c.problems->find(pid);
+        if (!p) {
+            return cb(errorResponse(ErrorCode::ValidationFailed, "unknown problem_id: " + pid));
+        }
+        problemJson = {{"problem_id", p->id}, {"input_type", p->input_type},
+                       {"output_type", p->output_type}, {"operation", p->operation},
+                       {"max_n", p->max_n}};
+    } else {
         return cb(errorResponse(ErrorCode::ValidationFailed, "problem is required"));
     }
+
     ProblemSpec spec;
     std::string err;
-    if (!parseProblemSpec(*probIt, spec, err)) {
+    if (!parseProblemSpec(problemJson, spec, err)) {
         return cb(errorResponse(ErrorCode::ValidationFailed, err));
     }
     if (!spec.problem_id.empty() && c.problems && !c.problems->find(spec.problem_id)) {
@@ -71,7 +91,22 @@ void JobController::list(const drogon::HttpRequestPtr& req, Callback&& cb) const
         }
         limit = static_cast<std::size_t>(std::min<long>(v, 200));
     }
-    cb(jsonResponse({{"jobs", c.jobs->list(limit)}}));
+
+    const std::string typeFilter = req->getParameter("type");
+    const std::string statusFilter = req->getParameter("status");
+
+    auto jobList = c.jobs->list(limit * 4 > 200 ? 200 : limit * 4);  // over-fetch, then filter
+    if (!typeFilter.empty()) {
+        jobList.erase(std::remove_if(jobList.begin(), jobList.end(),
+            [&](const Job& j) { return toString(j.type) != typeFilter; }), jobList.end());
+    }
+    if (!statusFilter.empty()) {
+        jobList.erase(std::remove_if(jobList.begin(), jobList.end(),
+            [&](const Job& j) { return toString(j.status) != statusFilter; }), jobList.end());
+    }
+    if (jobList.size() > limit) jobList.resize(limit);
+
+    cb(jsonResponse({{"jobs", jobList}, {"total", jobList.size()}, {"limit", limit}, {"offset", 0}}));
 }
 
 void JobController::get(const drogon::HttpRequestPtr&, Callback&& cb, std::string&& idStr) const {

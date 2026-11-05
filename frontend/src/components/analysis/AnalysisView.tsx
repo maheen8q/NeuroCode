@@ -20,9 +20,6 @@ export default function AnalysisView({ r, code }: { r: AnalysisResult; code: str
 
   return (
     <div className="space-y-6">
-      {r.execution && !r.execution.compiled && (
-        <ErrorBox title="The code did not compile">{r.execution.compile_error && <pre className="mt-1 overflow-x-auto font-mono text-xs">{r.execution.compile_error}</pre>}</ErrorBox>
-      )}
       <MetricsBar r={r} />
       <Tabs value={tab} onChange={setTab} tabs={[{ value: 'overview', label: 'Overview' }, { value: 'code', label: 'Code' }, { value: 'structure', label: 'Structure' }]} />
       {tab === 'overview' && (
@@ -30,7 +27,7 @@ export default function AnalysisView({ r, code }: { r: AnalysisResult; code: str
           <ComplexityCard complexity={r.complexity} />
           <AlgorithmCard algorithms={r.algorithms} lowConfidence={r.low_confidence} modelVersion={r.model_version} />
           <FindingsList findings={r.findings} onJump={() => setTab('code')} />
-          <CounterexampleCard items={r.counterexamples} testsRun={r.execution?.tests_run} />
+          <CounterexampleCard items={r.counterexamples} />
         </div>
       )}
       {tab === 'code' && (

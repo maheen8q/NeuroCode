@@ -84,8 +84,7 @@ std::vector<ModelService::Found> ModelService::scan() const {
         // Field names follow ml/Trainer.hpp ModelInfo. epochs_run and best_val_loss are not
         // in that struct yet: they are used when present, otherwise epochs falls back to
         // best_epoch and loss stays unknown.
-        const double test = j.value("test_accuracy", 0.0);
-        m.accuracy = test > 0 ? test : j.value("val_accuracy", 0.0);
+        m.accuracy = j.value("metrics", nlohmann::json::object()).value("cv_accuracy", 0.0);
         m.epochs = j.value("epochs_run", j.value("best_epoch", 0));
         m.dataset_size = j.value("dataset_size", 0);
         if (j.contains("best_val_loss") && j["best_val_loss"].is_number()) m.loss = j["best_val_loss"].get<double>();

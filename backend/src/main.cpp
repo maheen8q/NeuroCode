@@ -1,14 +1,10 @@
-// T3: boots the server. Order matters: config -> database -> recovery -> models -> predictor -> Drogon.
-//
-// Auth is a stub (config.json "auth.mode": "stub"): one seeded user, no hashing library.
-// Controllers, JobManager and the WebSocket (src/api, src/services) are added in later batches;
-// Drogon registers HttpController classes by itself, so they need no change here. Only /api/v1/health
-// is served from this file, so `curl` works as soon as the binary starts.
+// T3: boots the server. Order matters: config -> database -> recovery -> models -> predictor -> services -> Drogon.
 #include <drogon/drogon.h>
 
 #include <chrono>
 #include <cstdio>
 #include <fstream>
+#include <memory>
 #include <string>
 
 #include <nlohmann/json.hpp>
@@ -19,9 +15,13 @@
 #include "storage/ModelRepo.hpp"
 #include "storage/UserRepo.hpp"
 #include "common/AppContext.hpp"
-#include "engine/IEngine.hpp"          // makeEngine
+#include "engine/IEngine.hpp"
+#include "services/AuthService.hpp"
 #include "services/JobManager.hpp"
 #include "services/ProgressBroadcaster.hpp"
+#include "services/ProblemCatalog.hpp"
+#include "services/ModelService.hpp"
+#include "services/StubTrainer.hpp"
 
 using json = nlohmann::json;
 
@@ -57,11 +57,12 @@ int main(int argc, char** argv) {
         }
     }
     const json server = section(cfg, "server"), dbc = section(cfg, "db"), auth = section(cfg, "auth");
+    const json jobs_cfg = section(cfg, "jobs");
     const std::string models_dir = cfg.value("models_dir", std::string("models"));
     const std::string cors_origin = server.value("cors_origin", std::string("http://localhost:5173"));
 
     try {
-        // 1. Database: schema and seed are idempotent, so running them on every boot is safe.
+        // 1. Database.
         nc::Database db(dbc.value("path", std::string("data/neurocode.db")));
         db.execFile(dbc.value("schema", std::string("db/schema.sql")));
         db.execFile(dbc.value("seed", std::string("db/seed.sql")));
@@ -70,42 +71,56 @@ int main(int argc, char** argv) {
         nc::JobRepo jobs(db);
         nc::ModelRepo models(db);
 
-        // 2. Jobs left queued/running by a previous process can never finish: mark them failed.
+        // 2. Recovery.
         if (int n = jobs.failInterrupted(); n > 0)
             std::fprintf(stderr, "neurocode: marked %d interrupted job(s) as failed\n", n);
 
-        // 3. Stub auth: one known user. Real signup/Argon2 comes after jobs work end to end.
+        // 3. Stub auth: one known user.
         if (auth.value("mode", std::string("stub")) == "stub") {
             auto u = users.ensureUser(auth.value("username", std::string("demo")), "STUB-NO-HASH");
             std::fprintf(stderr, "neurocode: stub auth, user '%s' (id %lld)\n", u.username.c_str(), (long long)u.id);
         }
+        static nc::AuthService authService(
+            auth.value("username", std::string("demo")),
+            auth.value("token", std::string("dev-token-change-me")));
+        nc::ctx().auth = &authService;
 
-        // 4. Models: refresh the cache from disk, then load the predictor with the SAME rule
-        //    (newest .pt). If the predictor had to fall back to an older checkpoint, follow it.
+        // 4. Models + predictor.
         int n_models = models.syncFromDisk(models_dir);
         auto predictor = nc::makePredictor(models_dir);
-        // Wire the job pipeline into the shared context the controllers read.
-        nc::ProgressBroadcaster broadcaster;   // check its constructor; may need args (see note)
-
-        auto engineFactory = [&predictor]() -> std::shared_ptr<nc::IEngine> {
-            return nc::makeEngine(*predictor);
-        };
-
-        nc::JobManager manager(
-            engineFactory,
-            server.value("job_workers", 2),        // config key, falls back to 2
-            server.value("job_history", 100),      // keep last 100 finished jobs
-            broadcaster);
-
-        nc::ctx().jobs = &manager;
-        nc::ctx().broadcaster = &broadcaster;
         const std::string loaded_version = predictor->activeModelVersion();
-        if (!loaded_version.empty()) models.setActiveVersion(loaded_version);   // false for the stub: ignored
+        if (!loaded_version.empty()) models.setActiveVersion(loaded_version);
         const bool model_loaded = !loaded_version.empty() && models.findByVersion(loaded_version).has_value();
         std::fprintf(stderr, "neurocode: %d checkpoint(s) in %s, active model: %s\n", n_models, models_dir.c_str(),
                      model_loaded ? loaded_version.c_str() : "none (stub predictor)");
 
-        // 5. HTTP.
+        // 5. Remaining services (predictor must exist first).
+        static nc::ProgressBroadcaster broadcaster;
+        nc::ctx().broadcaster = &broadcaster;
+
+        static nc::JobManager jobManager(
+            [&predictor]() -> std::shared_ptr<nc::IEngine> { return nc::makeEngine(*predictor); },
+            static_cast<std::size_t>(jobs_cfg.value("worker_threads", 4)),
+            100,
+            broadcaster);
+        nc::ctx().jobs = &jobManager;
+
+        static nc::ProblemCatalog problemCatalog;
+        nc::ctx().problems = &problemCatalog;
+
+        static nc::ModelService modelService(
+            models_dir,
+            [&predictor, models_dir](const std::string&) -> bool {
+                auto reloaded = nc::makePredictor(models_dir);
+                if (reloaded->activeModelVersion().empty()) return false;
+                predictor = std::move(reloaded);
+                return true;
+            });
+        nc::ctx().models = &modelService;
+
+        jobManager.setTrainFn(nc::makeStubTrainFn());
+
+        // 6. HTTP.
         auto& app = drogon::app();
         app.setThreadNum(server.value("http_threads", 2));
         app.addListener(server.value("host", std::string("127.0.0.1")), server.value("port", 8080));
@@ -146,7 +161,7 @@ int main(int argc, char** argv) {
 
         std::fprintf(stderr, "neurocode: listening on http://%s:%d\n",
                      server.value("host", std::string("127.0.0.1")).c_str(), server.value("port", 8080));
-        app.run();   // blocks until SIGINT / SIGTERM; db, repos and predictor outlive it
+        app.run();
     } catch (const std::exception& e) {
         std::fprintf(stderr, "neurocode: fatal: %s\n", e.what());
         return 1;

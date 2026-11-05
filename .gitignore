@@ -29,4 +29,7 @@ backend/models/
 backend/tools/train/build/
 backend/models/
 build/
-backend/build/
+backend/build/*.db-shm
+*.db-wal
+.vite/
+how 8911849

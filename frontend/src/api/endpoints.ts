@@ -10,7 +10,7 @@ export const E = {
   jobs: `${V1}/jobs`,
   job: (id: number) => `${V1}/jobs/${id}`, // GET reads, DELETE cancels
   execute: `${V1}/execute`,
-  train: `${V1}/train`,
+  train: `${V1}/models/train`,
   models: `${V1}/models`,
   activate: (id: number) => `${V1}/models/${id}/activate`,
   ws: (id: number) => `${V1}/ws/jobs/${id}`,
