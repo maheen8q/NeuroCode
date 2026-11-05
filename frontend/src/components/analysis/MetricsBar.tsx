@@ -9,15 +9,16 @@ const Metric = ({ label, value, note, tone }: { label: string; value: ReactNode;
   </div>
 );
 
-/** Three numbers the backend actually returns: test results, suspicious patterns, counterexamples. */
+/** Three numbers the backend actually returns: counterexamples, suspicious patterns, and whether
+ * differential testing found any mismatches. The backend does not report a total test count, so
+ * this never claims an "X/Y tests" ratio, only whether any counterexample was found. */
 export default function MetricsBar({ r }: { r: AnalysisResult }) {
-  const ex = r.execution;
   const high = r.findings.filter((f) => f.severity === 'high').length;
-  const failing = ex && ex.compiled && ex.tests_passed < ex.tests_run;
+  const failing = r.counterexamples.length > 0;
   return (
     <div className="grid gap-4 sm:grid-cols-3">
-      <Metric label="Generated tests passed" value={ex?.compiled ? `${ex.tests_passed}/${ex.tests_run}` : 'None run'} tone={!ex?.compiled || failing ? 'text-bad' : 'text-ink'}
-        note={!ex?.compiled ? 'The code did not compile' : failing ? `${ex.tests_run - ex.tests_passed} differ from the reference` : 'All matched the reference'} />
+      <Metric label="Differential testing" value={failing ? 'Mismatches found' : 'No mismatches'} tone={failing ? 'text-bad' : 'text-ink'}
+        note={failing ? `${r.counterexamples.length} input(s) differ from the reference` : 'Matched the reference on every generated input'} />
       <Metric label="Suspicious patterns" value={r.findings.length} tone={high ? 'text-bad' : 'text-ink'} note={high ? `${high} high severity` : 'None high severity'} />
       <Metric label="Counterexamples" value={r.counterexamples.length} tone={r.counterexamples.length ? 'text-bad' : 'text-ink'}
         note={r.counterexamples.length ? 'Inputs where the output is wrong' : 'None found'} />

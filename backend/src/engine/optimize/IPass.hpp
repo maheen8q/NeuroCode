@@ -23,6 +23,7 @@ struct PassContext {
     const void* ast = nullptr;    // T4: clang-shaped AST root
     const void* cfg = nullptr;    // T4: control flow graph
     std::string sourceCode;       // original user code, already I/O-stripped
+    std::string operation;
 };
 
 class IPass {

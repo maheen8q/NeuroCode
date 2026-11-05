@@ -28,7 +28,7 @@ export default function Optimization() {
   if (error && !job) return <ErrorBox title="Could not load this optimization" action={<Button size="sm" variant="secondary" onClick={() => void refresh()}>Try again</Button>}>{error}</ErrorBox>;
   if (!job) return <Loading label="Loading optimization" />;
   const running = !isTerminal(job.status);
-  const o = r?.optimization;
+  const o = r;
   // Spec rendering rule: never show generated code unless it was verified.
   const verified = !!o && o.verified && !!o.optimized_code && !!o.summary;
   const edit = (code: string) => nav('/analyze', { state: { code } });
@@ -51,8 +51,8 @@ export default function Optimization() {
         <div className="space-y-8">
           {verified && o.summary && o.optimized_code ? (
             <>
-              <SummaryCard s={o.summary} bench={o.benchmark}
-                verification={<VerificationBadge verified testsRun={o.verification?.tests_run} mismatches={o.verification?.mismatches} />} />
+              <SummaryCard s={o.summary} bench={o.bench}
+                verification={<VerificationBadge verified testsRun={o.verification?.mismatches} mismatches={o.verification?.mismatches} />} />
               <div className="grid gap-6 lg:grid-cols-2"><ComparisonTable rows={o.summary.comparison} /><ChangeList changes={o.summary.changes} /></div>
               <Card title="Code" action={<div className="flex gap-1 rounded-lg border border-line bg-raised p-0.5">{([['diff', 'Diff'], ['code', 'Optimized code']] as const).map(([k, l]) => <button key={k} onClick={() => setTab(k)} aria-pressed={tab === k} className={`rounded-md px-3 py-1 text-sm ${tab === k ? 'bg-panel font-medium' : 'text-mute'}`}>{l}</button>)}</div>}>
                 {tab === 'diff'
@@ -69,7 +69,7 @@ export default function Optimization() {
           )}
           <section>
             <h2 className="mb-4 text-xl font-bold">Analysis of your original code</h2>
-            <AnalysisView r={r} code={sub?.code ?? null} />
+            <AnalysisView r={r.analysis} code={sub?.code ?? null} />
           </section>
         </div>
       )}

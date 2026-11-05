@@ -421,6 +421,7 @@ std::vector<optimize::OptimizationResult> findOptimizations(const Ctx& c, const 
         pc.ast = &job.ast;            // const ast::Node*
         pc.cfg = &job.cfgs;           // const std::vector<cfg::Cfg>*
         pc.sourceCode = job.code;
+        pc.operation = job.spec.operation;
         return catalog.run(pc);
     } catch (...) {
         return {};                    // a broken pass must not take the analysis down

@@ -48,8 +48,8 @@ export default function History() {
               <thead><tr className="border-b border-line text-mute">{['Job', 'Type', 'Problem', 'Detected algorithm', 'Time', 'Status', 'Started'].map((h) => <th key={h} className="px-5 py-3 font-medium">{h}</th>)}</tr></thead>
               <tbody>
                 {data.jobs.map((j) => (
-                  <tr key={j.job_id} className="border-b border-line last:border-0 hover:bg-raised/60">
-                    <td className="px-5 py-3"><Link to={jobHref(j)} className="font-medium text-accent hover:underline">#{j.job_id}</Link></td>
+                  <tr key={j.id} className="border-b border-line last:border-0 hover:bg-raised/60">
+                    <td className="px-5 py-3"><Link to={jobHref(j)} className="font-medium text-accent hover:underline">#{j.id}</Link></td>
                     <td className="px-5 py-3">{typeLabel[j.type]}</td>
                     <td className="px-5 py-3 font-mono text-mute">{j.type === 'train' ? '-' : j.problem_id ?? 'custom'}</td>
                     <td className="px-5 py-3">{j.type === 'train' ? '-' : humanize(j.algorithm)}</td>

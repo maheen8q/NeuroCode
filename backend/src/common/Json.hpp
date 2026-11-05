@@ -113,13 +113,27 @@ inline void to_json(nlohmann::json& j, const Job& job) {
          {"finished_at", job.finished_at.empty() ? nlohmann::json(nullptr) : nlohmann::json(job.finished_at)}};
 
     nlohmann::json result = nullptr;
+    nlohmann::json algorithm = nullptr;
+    nlohmann::json time_complexity = nullptr;
+
     std::visit(
         [&](const auto& r) {
             using T = std::decay_t<decltype(r)>;
             if constexpr (!std::is_same_v<T, std::monostate>) result = r;
+
+            if constexpr (std::is_same_v<T, AnalysisResult>) {
+                if (!r.algorithms.empty()) algorithm = r.algorithms.front().label;
+                if (!r.complexity.time.empty()) time_complexity = r.complexity.time;
+            } else if constexpr (std::is_same_v<T, OptimizeResult>) {
+                if (!r.analysis.algorithms.empty()) algorithm = r.analysis.algorithms.front().label;
+                if (!r.analysis.complexity.time.empty()) time_complexity = r.analysis.complexity.time;
+            }
         },
         job.result);
+
     j["result"] = std::move(result);
+    j["algorithm"] = algorithm;
+    j["time_complexity"] = time_complexity;
 }
 
 // ---- request validation ----------------------------------------------------
