@@ -2,6 +2,7 @@
 #include "passes/PairSumToHash.hpp"
 #include "passes/LinearToBinarySearch.hpp"
 #include "passes/RangeSumToPrefix.hpp"
+#include "passes/FibonacciMemo.hpp"
 
 namespace nc::optimize {
 
@@ -9,6 +10,7 @@ Catalog::Catalog() {
     add(std::make_unique<PairSumToHash>());
     add(std::make_unique<LinearToBinarySearch>());
     add(std::make_unique<RangeSumToPrefix>());
+    add(std::make_unique<FibonacciMemo>());
 }
 
 void Catalog::add(std::unique_ptr<IPass> pass) {
