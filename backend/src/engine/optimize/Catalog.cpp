@@ -1,12 +1,14 @@
 #include "Catalog.hpp"
 #include "passes/PairSumToHash.hpp"
 #include "passes/LinearToBinarySearch.hpp"
+#include "passes/RangeSumToPrefix.hpp"
 
 namespace nc::optimize {
 
 Catalog::Catalog() {
     add(std::make_unique<PairSumToHash>());
     add(std::make_unique<LinearToBinarySearch>());
+    add(std::make_unique<RangeSumToPrefix>());
 }
 
 void Catalog::add(std::unique_ptr<IPass> pass) {

@@ -1,0 +1,10 @@
+#include <vector>
+#include <utility>
+std::vector<long long> solve(const std::vector<int>& {{ARR}}, const std::vector<std::pair<int,int>>& qs) {
+    std::vector<long long> prefix(({{ARR}}).size() + 1, 0);
+    for (size_t i = 0; i < ({{ARR}}).size(); ++i) prefix[i + 1] = prefix[i] + {{ARR}}[i];
+    std::vector<long long> out;
+    out.reserve(qs.size());
+    for (auto& q : qs) out.push_back(prefix[q.second + 1] - prefix[q.first]);
+    return out;
+}
