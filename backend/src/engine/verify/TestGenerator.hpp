@@ -26,7 +26,7 @@ namespace nc::verify {
 //                                                                         sum of a[l..r] (inclusive, 0-based) per query
 //   fibonacci       long long solve(int n)                                F(0)=0, F(1)=1
 // Aliases are accepted (two_sum, linear_search, binary_search, prefix_sum, fib, ...), see parseOperation().
-enum class Operation { PairSum, Search, SearchSorted, RangeSum, Fibonacci, Unknown };
+enum class Operation { PairSum, Search, SearchSorted, RangeSum, Fibonacci, KSmallest, Unknown };
 
 Operation parseOperation(const std::string& name);   // case-insensitive, aliases included; Unknown if not supported
 const char* toString(Operation op);                   // canonical name, "unknown" for Unknown
@@ -40,7 +40,7 @@ struct TestCase {
     std::string name;            // "empty", "single_miss", "max_values_wrap", "random_small_7", ...
     std::string category;        // empty, single, all_equal, sorted_asc, sorted_desc, max_values, edge, random_small, random_large
     std::vector<int> a;
-    int param = 0;               // k (pair_sum), target (search, search_sorted), n (fibonacci)
+    int param = 0;               // k (pair_sum, k_smallest), target (search, search_sorted), n (fibonacci)
     std::vector<Query> queries;  // range_sum
 
     // Text sent to the program's stdin (one format per operation, numbers separated by single spaces):

@@ -22,7 +22,7 @@ export default function Results() {
 
   if (error && !job) return <ErrorBox title="Could not load this analysis" action={<Button size="sm" variant="secondary" onClick={() => void refresh()}>Try again</Button>}>{error}</ErrorBox>;
   if (!job) return <Loading label="Loading analysis" />;
-  if (job.type === 'optimize') return <Navigate to={`/optimize/${job.job_id}`} replace />;
+  if (job.type === 'optimize') return <Navigate to={`/optimize/${job.id}`} replace />;
   if (job.type === 'train') return <Navigate to="/training" replace />;
 
   const r = job.result as AnalysisResult | null;
@@ -32,13 +32,13 @@ export default function Results() {
     setActErr(''); setStarting(true);
     try { nav(`/optimize/${await submitJob('optimize', sub)}`); } catch (e) { setActErr(errorMessage(e)); setStarting(false); }
   };
-  const cancel = async () => { try { await api.jobs.cancel(job.job_id); } catch { /* already finished */ } await refresh(); };
+  const cancel = async () => { try { await api.jobs.cancel(job.id); } catch { /* already finished */ } await refresh(); };
   const edit = () => sub && nav('/analyze', { state: { code: sub.code } });
 
   return (
     <>
       <Link to="/analyze" className="mb-4 inline-flex items-center gap-1.5 text-sm text-mute hover:text-ink"><ArrowLeft className="h-4 w-4" />Back to editor</Link>
-      <PageHeader title={`Analysis #${job.job_id}`} description={`Started ${relTime(job.created_at)}${sub?.problem_id ? ` for problem ${sub.problem_id}` : sub ? ' with a custom problem' : ''}.`}
+      <PageHeader title={`Analysis ${job.id}`} description={`Started ${relTime(job.created_at)}${sub?.problem_id ? ` for problem ${sub.problem_id}` : sub ? ' with a custom problem' : ''}.`}
         actions={<>
           <Badge tone={statusTone[job.status]} className="!px-3 !py-1.5 !text-sm">{job.status}</Badge>
           {running && <Button variant="danger" icon={<XCircle className="h-4 w-4" />} onClick={() => void cancel()}>Cancel</Button>}

@@ -36,7 +36,7 @@ export default function Optimization() {
   return (
     <>
       <Link to="/history" className="mb-4 inline-flex items-center gap-1.5 text-sm text-mute hover:text-ink"><ArrowLeft className="h-4 w-4" />History</Link>
-      <PageHeader title={`Optimization #${job.job_id}`} description="The optimized version is shown only if it matched the original on every generated test."
+      <PageHeader title={`Optimization ${job.id}`} description="The optimized version is shown only if it matched the original on every generated test."
         actions={<Badge tone={statusTone[job.status]} className="!px-3 !py-1.5 !text-sm">{job.status}</Badge>} />
 
       {running && <PipelineProgress percent={live.percent || job.progress} stage={live.stage || job.stage} status={job.status} />}

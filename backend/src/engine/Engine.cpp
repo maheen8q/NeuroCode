@@ -196,6 +196,7 @@ std::string harnessFor(verify::Operation op, const std::string& entry) {
         case verify::Operation::PairSum:
         case verify::Operation::Search:
         case verify::Operation::SearchSorted:
+        case verify::Operation::KSmallest:
             h += "    int n = 0; long long param = 0;\n"
                  "    std::cin >> n >> param;\n"
                  "    std::vector<int> a(n > 0 ? n : 0);\n"

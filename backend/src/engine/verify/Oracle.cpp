@@ -43,6 +43,13 @@ long long fibonacciNumber(int n) {
     return n <= 0 ? 0 : b;
 }
 
+std::vector<int> kSmallest(std::vector<int> a, int k) {
+    k = std::max(0, std::min(k, static_cast<int>(a.size())));
+    std::sort(a.begin(), a.end());
+    a.resize(static_cast<size_t>(k));
+    return a;
+}
+
 namespace {
 
 std::vector<std::string> tokens(const std::string& s) {
@@ -93,6 +100,11 @@ std::string Oracle::expectedOutput(const TestCase& tc) const {
         }
         case Operation::Fibonacci:
             return tc.param >= 0 && tc.param <= 92 ? std::to_string(fibonacciNumber(tc.param)) : std::string();
+        case Operation::KSmallest: {
+            std::string out;
+            for (int v : kSmallest(tc.a, tc.param)) out += (out.empty() ? "" : "\n") + std::to_string(v);
+            return out;
+        }
         case Operation::Unknown:
             break;
     }
@@ -153,6 +165,23 @@ Verdict Oracle::check(const TestCase& tc, const std::string& program_output) con
             const auto got = parseInteger(toks[0]);
             if (!got) return malformed("expected an integer, got '" + clip(toks[0]) + "'");
             if (std::to_string(*got) != v.expected) return fail("expected " + v.expected + ", got " + std::to_string(*got));
+            return v;
+        }
+        case Operation::KSmallest: {
+            const int wantCount = std::min(tc.param, static_cast<int>(tc.a.size()));
+            if (toks.size() != static_cast<size_t>(std::max(0, wantCount)))
+                return malformed("expected " + std::to_string(wantCount) + " value(s), got " + std::to_string(toks.size()));
+            std::vector<int> got;
+            got.reserve(toks.size());
+            for (size_t i = 0; i < toks.size(); ++i) {
+                const auto n = parseInteger(toks[i]);
+                if (!n) return malformed("value " + std::to_string(i) + " is not an integer: '" + clip(toks[i]) + "'");
+                got.push_back(static_cast<int>(*n));
+            }
+            std::vector<int> want = kSmallest(tc.a, tc.param);
+            std::sort(got.begin(), got.end());
+            std::sort(want.begin(), want.end());
+            if (got != want) return fail("the k smallest values do not match (order does not matter, but the set of values must)");
             return v;
         }
         case Operation::Unknown:
