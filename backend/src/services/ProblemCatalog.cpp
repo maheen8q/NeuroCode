@@ -14,7 +14,7 @@ ProblemCatalog::ProblemCatalog() {
         {"fibonacci", "Nth Fibonacci number", "int", "int", "fibonacci", 90, "O(n)",
          "Compute the n-th Fibonacci number."},
         {"k_smallest", "K smallest elements", "int_array", "array", "k_smallest", 100000, "O(n log k)",
-         "Return the k smallest elements of the array."},
+         "Return the k smallest elements of the array. Analysis only: optimization is not yet verified for this operation."},
     };
 }
 

@@ -63,6 +63,7 @@ Operation parseOperation(const std::string& name) {
     if (n == "search_sorted" || n == "binary_search" || n == "sorted_search" || n == "find_sorted") return Operation::SearchSorted;
     if (n == "range_sum" || n == "prefix_sum" || n == "range_query_sum" || n == "subarray_sum_queries") return Operation::RangeSum;
     if (n == "fibonacci" || n == "fib" || n == "nth_fibonacci") return Operation::Fibonacci;
+    if (n == "k_smallest" || n == "k_smallest_elements" || n == "kth_smallest") return Operation::KSmallest;
     return Operation::Unknown;
 }
 
@@ -73,6 +74,7 @@ const char* toString(Operation op) {
         case Operation::SearchSorted: return "search_sorted";
         case Operation::RangeSum: return "range_sum";
         case Operation::Fibonacci: return "fibonacci";
+        case Operation::KSmallest: return "k_smallest";
         case Operation::Unknown: break;
     }
     return "unknown";
@@ -148,6 +150,10 @@ void TestGenerator::finalize(TestCase& tc) const {
             tc.stdin_text = std::to_string(tc.param) + "\n";
             tc.display = "n = " + std::to_string(tc.param);
             break;
+        case Operation::KSmallest:
+            tc.stdin_text = n + " " + std::to_string(tc.param) + "\n" + joinInts(tc.a) + "\n";
+            tc.display = "a = " + showArray(tc.a) + "\nk = " + std::to_string(tc.param);
+            break;    
         case Operation::Unknown:
             break;
     }
@@ -256,6 +262,16 @@ std::vector<TestCase> TestGenerator::generate() const {
             add("largest_n", "max_values", {}, top);
             break;
         }
+        case Operation::KSmallest:
+            add("empty", "empty", {}, 0);
+            add("k_equals_n", "edge", {5, 3, 1, 4, 2}, 5);
+            add("k_equals_1", "edge", {5, 3, 1, 4, 2}, 1);
+            add("all_equal", "all_equal", {3, 3, 3, 3}, 2);
+            add("sorted_asc", "sorted_asc", {1, 2, 3, 4, 5, 6, 7, 8}, 3);
+            add("sorted_desc", "sorted_desc", {8, 7, 6, 5, 4, 3, 2, 1}, 3);
+            add("negatives", "edge", {-5, -3, 8, -1, 0}, 2);
+            add("max_values", "max_values", {MX, MN, 0, MX, MN}, 3);
+            break;
         case Operation::Unknown:
             break;
     }
@@ -286,6 +302,9 @@ std::vector<TestCase> TestGenerator::generate() const {
             } else {
                 k = static_cast<int>(rng.range(-25, 25));
             }
+              addNamed(name, "random_small", std::move(a), k);
+        } else if (op_ == Operation::KSmallest) {
+            const int k = static_cast<int>(rng.range(1, n));
             addNamed(name, "random_small", std::move(a), k);
         } else {
             const int target = rng.coin() ? a[static_cast<size_t>(rng.range(0, n - 1))] : static_cast<int>(rng.range(-12, 12));
@@ -316,15 +335,17 @@ std::vector<TestCase> TestGenerator::generate() const {
                 k = static_cast<int>(rng.range(-1000000000, 1000000000));
             }
             addNamed(name, "random_large", std::move(a), k);
+        } else if (op_ == Operation::KSmallest) {
+            const int k2 = static_cast<int>(rng.range(1, std::min(large_n, 1000)));
+            addNamed(name, "random_large", std::move(a), k2);
         } else {
             int target;
             switch (i % 3) {
                 case 0: target = a[static_cast<size_t>(rng.range(0, large_n - 1))]; break;   // present
                 case 1: target = 2000000000; break;                                           // absent
                 default: target = a[static_cast<size_t>(large_n - 1)]; break;                // last element in the array
-            }
-            addNamed(name, "random_large", std::move(a), target);
-        }
+            }  addNamed(name, "random_large", std::move(a), target);
+        }    
     }
     return out;
 }
@@ -357,6 +378,10 @@ TestCase TestGenerator::worstCase(long long n) const {
         case Operation::Fibonacci:
             tc.param = static_cast<int>(std::min<long long>(n, kMaxFib));
             break;
+        case Operation::KSmallest:                        // full sort costs n log n; k itself kept small
+            for (long long i = 0; i < n; ++i) tc.a.push_back(static_cast<int>((i * 2654435761ULL) % 2000000000ULL) - 1000000000);
+            tc.param = static_cast<int>(std::min<long long>(n, 10));
+            break;    
         case Operation::Unknown:
             break;
     }
