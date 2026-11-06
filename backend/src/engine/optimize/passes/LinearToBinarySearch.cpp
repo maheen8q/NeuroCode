@@ -52,10 +52,14 @@ static bool matchesLinearScan(const PassContext& ctx, std::string& arr, std::str
             const Node* subSide = nullptr;
             const Node* otherSide = nullptr;
             for (const Node& side : eq->children) {
-                if (side.type == "CALL_EXPR" && side.spelling == "operator[]") subSide = &side;
-                else otherSide = &side;
+                const Node* sub = firstOfType(side, "CALL_EXPR");
+                if (sub && sub->spelling == "operator[]" && sub->base_text) {
+                    subSide = sub;
+                } else {
+                    otherSide = &side;
+                }
             }
-            if (!subSide || !otherSide || !subSide->base_text) continue;
+            if (!subSide || !otherSide) continue;
 
             const Node* ref = firstOfType(*otherSide, "DECL_REF_EXPR");
             arr = *subSide->base_text;

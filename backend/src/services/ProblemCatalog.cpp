@@ -7,7 +7,7 @@ ProblemCatalog::ProblemCatalog() {
     problems_ = {
         {"pair_sum", "Pair with a given sum", "int_array", "bool", "pair_sum", 100000, "O(n)",
          "Decide whether any two elements of the array add up to k."},
-        {"search", "Search in a sorted array", "int_array", "int", "search", 1000000, "O(log n)",
+        {"search", "Search in a sorted array", "int_array", "int", "search_sorted", 1000000, "O(log n)",
          "Find the index of a target value in a sorted array, or -1."},
         {"range_sum", "Range sum queries", "int_array", "array", "range_sum", 100000, "O(n + q)",
          "Answer many sum(l, r) queries over a fixed array."},
