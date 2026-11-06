@@ -7,7 +7,7 @@ import { useJob } from '../hooks/useJob';
 import { JOB_ERROR_TITLE, errorMessage } from '../lib/errors';
 import { fmtN, fmtPct, isTerminal, relTime } from '../lib/format';
 import type { EpochMetrics, ModelInfo } from '../types/api';
-
+import ActiveModelCard from '../components/training/ActiveModelCard';
 const KEY = 'nc.trainJob';
 const DEFAULTS = { epochs: 50, batch_size: 32, learning_rate: 0.001 };
 
@@ -80,6 +80,8 @@ export default function Training() {
               </>
             )}
           </Card>
+
+          <ActiveModelCard models={models} />
 
           <Card title="Saved models" subtitle="Activating a model changes the predictions for new analyses only." pad={false}>
             {modelErr && <div className="p-5"><ErrorBox title="Model request failed">{modelErr}</ErrorBox></div>}
