@@ -38,6 +38,20 @@ void addCors(const drogon::HttpResponsePtr& resp, const std::string& origin) {
     resp->addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
 }
 
+// Drogon WebSocket routes can't take path parameters, so /ws/jobs/{id} (and the
+// /api/v1-prefixed form) becomes /ws/jobs?job_id={id}. Same rewrite as Middleware.cpp
+// step 4, without its CORS and rate-limit parts, which need config this build doesn't set.
+void rewriteProgressSocketPath(const drogon::HttpRequestPtr& req) {
+    const std::string path = req->path();
+    for (const std::string prefix : {"/api/v1/ws/jobs/", "/ws/jobs/"}) {
+        if (path.rfind(prefix, 0) == 0 && path.size() > prefix.size()) {
+            req->setParameter("job_id", path.substr(prefix.size()));
+            req->setPath("/ws/jobs");
+            return;
+        }
+    }
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -138,6 +152,7 @@ int main(int argc, char** argv) {
                 addCors(resp, cors_origin);
                 cb(resp);
             } else {
+                rewriteProgressSocketPath(req);
                 next();
             }
         });
