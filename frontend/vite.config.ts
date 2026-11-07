@@ -7,6 +7,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
+    // Allow any Cloudflare quick-tunnel address (it changes on every restart).
+    allowedHosts: ['.trycloudflare.com'],
     proxy: {
       // Covers REST and the WebSocket at /api/v1/ws/jobs/{id}
       '/api': { target: 'http://localhost:8080', changeOrigin: true, ws: true },
