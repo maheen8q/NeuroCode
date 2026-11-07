@@ -2,9 +2,9 @@
 
 An AI-assisted C++ code reasoning and optimization engine.
 
-A user submits a C++ solution plus a short structured description of the problem it solves. NeuroCode parses the code into an AST, builds a control flow graph, derives its time and space complexity, classifies the algorithm using a trained neural network, runs the code in a sandbox against generated test cases, and, when a better approach exists, produces an optimized version with a measured speedup.
+A user submits a C++ solution plus a short structured description of the problem it solves. NeuroCode parses the code into an AST, builds a control flow graph, derives its time and space complexity by rule, classifies the algorithm using a trained neural network, runs the code in a sandbox against generated test cases against a reference solution, and, when a known faster pattern applies, produces an optimized version with a measured, verified speedup.
 
-It is not a linter and not a chatbot wrapper. Every layer is built in this repository.
+It is not a linter and not a chatbot wrapper. Every layer is built in this repository, and nothing is shown to the user until it has actually been checked.
 
 ---
 
@@ -20,25 +20,27 @@ bool solve(vector<int>& a, int k) {
     return false;
 }
 ```
-Problem metadata: input = integer array, n <= 100000, output = boolean, operation = pair sum.
+Problem metadata: input = integer array, n ≤ 100000, output = boolean, operation = pair sum.
 
 **Output, part 1: analysis**
 
 | Field | Value |
 |---|---|
-| Detected algorithm | Brute force pair search (0.94) |
-| Time complexity | O(n^2) |
-| Space complexity | O(1) |
-| Verdict | Correct but too slow for n = 100000 |
+| Detected algorithm (classifier) | Brute force pair search (99.9%) |
+| Time complexity (rule-derived) | O(n²) |
+| Space complexity (rule-derived) | O(1) |
+| Verdict | Fails on inputs near `INT_MAX`: `a + b` overflows a 32-bit `int` |
 | Recommended | Hash set lookup, O(n) time / O(n) space |
+
+The classifier's guess and the complexity engine's derivation are computed independently. They do not have to agree, and when they don't, the rule-derived result is the one the UI tells the user to trust. The classifier is a trained signal, not a proof.
 
 **Output, part 2: optimized code**
 
 ```cpp
 bool solve(vector<int>& a, int k) {
-    unordered_set<int> seen;
+    unordered_set<long long> seen;
     for (int x : a) {
-        if (seen.count(k - x)) return true;
+        if (seen.count(static_cast<long long>(k) - x)) return true;
         seen.insert(x);
     }
     return false;
@@ -49,27 +51,37 @@ bool solve(vector<int>& a, int k) {
 
 > **Replaced the inner scan with a hash set lookup.**
 >
-> The original checks every pair, so the work grows with the square of the input size. The new version stores each value as it passes and asks the set whether the complement `k - x` has already been seen, which answers the same question in one pass.
+> The original checks every pair, so the work grows with the square of the input size. The new version stores each value as it passes and asks the set whether the complement `k - x` has already been seen, which answers the same question in one pass, and uses a 64-bit accumulator so the complement calculation can't silently wrap around the way the original's addition does.
 >
 > | | Original | Optimized |
 > |---|---|---|
 > | Algorithm | Brute force pair search | Hash set lookup |
-> | Time | O(n^2) | O(n) expected |
+> | Time | O(n²) | O(n) expected |
 > | Space | O(1) | O(n) |
-> | Runtime at n = 50000 | 2841 ms | 8.4 ms |
-> | Memory | 412 KB | 2180 KB |
-> | Measured speedup | | **338x** |
+> | Measured speedup at n = 20000 | | **~13x** |
 >
-> **Changes made**
-> 1. Removed the nested loop over `j` (lines 3 to 5)
-> 2. Added an `unordered_set<int> seen` to record values already visited
-> 3. Replaced the `a[i] + a[j] == k` test with a complement lookup
->
-> **Trade-off:** memory rises from constant to linear in `n`. At the stated bound of n = 100000 this is roughly 400 KB, which is acceptable.
->
-> **Verification:** compiled successfully and produced identical output to the original on 200 generated inputs, including empty array, single element, all-equal values, and values near `INT_MAX`.
+> **Verification:** compiled successfully and matched the reference answer on every generated input, including the overflow cases the original code failed. Unverified code is never shown; if the generated candidate had not matched, the user would see "no verified optimization found" instead.
 
-Every summary is generated from real measurements. Nothing is shown until the optimized code has been compiled and differentially tested against the user's original.
+---
+
+## Four verified optimizations
+
+The optimizer is a catalog of independent passes. Each one pattern-matches a specific inefficient shape in the AST, generates a rewrite from a template, and only shows that rewrite if it compiles and produces identical output to the user's original on a battery of generated tests, including edge cases the user's own code may not have considered. A pass that cannot verify its rewrite shows nothing.
+
+| Pass | Detects | Rewrites to | Measured on this build |
+|---|---|---|---|
+| `PairSumToHash` | Nested-loop pair-sum scan | Hash-set lookup | O(n²) → O(n), ~13x at n = 20000 |
+| `LinearToBinarySearch` | Linear scan of a declared-sorted array | `std::binary_search` | O(n) → O(log n) |
+| `RangeSumToPrefix` | Per-query range summation | Prefix-sum array | O(n·q) → O(n+q) |
+| `FibonacciMemo` | Naive doubly-recursive Fibonacci | Iterative, bottom-up table | O(2ⁿ) → O(n) |
+
+A fifth catalog entry, k smallest elements, has full differential-testing support (a real reference implementation and an order-independent correctness check) but no optimizer pass yet; it is correctly analyzed but never offered an optimization, which is the intended behavior for any pattern the catalog doesn't yet cover.
+
+---
+
+## The classifier
+
+A feedforward network (53 hand-engineered AST/CFG features, two hidden layers, trained with cross-validation) predicts which of twelve algorithmic shapes the submitted code most resembles, returned as a ranked, probability-weighted list, never a single confident label. It is informational context, not a source of truth: the complexity and optimization results never depend on it.
 
 ---
 
@@ -77,15 +89,15 @@ Every summary is generated from real measurements. Nothing is shown until the op
 
 | Layer | Technology | Reason |
 |---|---|---|
-| Frontend | React 18 + TypeScript + Vite | Monaco and Recharts are the two components this UI needs most |
+| Frontend | React 18 + TypeScript + Vite | |
 | Editor | Monaco Editor | Same editor as VS Code, includes a diff view |
-| Styling | Tailwind CSS | Fast, no design system to maintain |
+| Styling | Tailwind CSS | |
 | Backend | C++20 + Drogon | Async HTTP and WebSocket in one framework |
 | Parsing | libclang | Real Clang AST, no hand-written parser |
-| ML | LibTorch (PyTorch C++ API) | Training happens inside the C++ backend, as required |
-| Database | SQLite | Real SQL, zero setup, swappable for Postgres later |
+| ML | LibTorch (PyTorch C++ API) | Training and inference both happen inside the C++ backend |
+| Database | SQLite | |
 | Sandbox | Forked subprocess with POSIX rlimits | Untrusted user code never runs in the API process |
-| Tests | GoogleTest (C++), Vitest (frontend) | Standard |
+| Tests | GoogleTest (C++), Vitest (frontend) | |
 
 ---
 
@@ -101,28 +113,21 @@ neurocode/
 └── backend/                     C++20, Drogon, LibTorch
 ```
 
-Full tree with per-folder ownership is in `docs/architecture.md`.
-
 ---
 
 ## Team and ownership
 
-Four people, five weeks. Nobody edits outside their own folders.
+Four people, five weeks.
 
 | Owner | Lane | Folders |
 |---|---|---|
-| Maheen | ML: features, dataset, LibTorch model, training, inference | `backend/src/ml/`, `backend/data/`, `backend/models/` |
+| Maheen | ML: features, dataset, LibTorch model, training, inference; also the final service-wiring, optimizer pass detection, and differential-testing additions in this repository | `backend/src/ml/`, `backend/data/`, `backend/models/` |
 | Mokshi | Frontend: all UI, editor, charts, pages | `frontend/` |
 | Wadia | Backend web side: API, WebSocket, auth, DB, job orchestration | `backend/src/api/`, `services/`, `storage/`, `db/` |
 | Anshrah | Backend compute side: AST, CFG, complexity, optimizer, sandbox | `backend/src/engine/`, `backend/src/sandbox/` |
 
-The four lanes meet at exactly three files. These are frozen in week 1 and change only by group agreement:
-
-1. `backend/src/engine/IEngine.hpp` (T3 to T4)
-2. `backend/src/ml/IPredictor.hpp` (T4 to T1)
-3. `docs/api-spec.md` (T3 to T2)
-
 ---
+
 ## Getting started
 
 ### Prerequisites
@@ -132,7 +137,7 @@ The four lanes meet at exactly three files. These are frozen in week 1 and chang
 - LibTorch 2.x (CPU build is fine)
 - Node.js 18+
 
-Linux or WSL strongly recommended. LibTorch on native Windows is the single most common setup failure on this project.
+Linux or WSL strongly recommended.
 
 ### Backend
 
@@ -140,7 +145,6 @@ Linux or WSL strongly recommended. LibTorch on native Windows is the single most
 cd backend
 cmake -B build -DCMAKE_PREFIX_PATH=/path/to/libtorch
 cmake --build build -j
-sqlite3 data/neurocode.db < db/schema.sql
 ./build/neurocode        # serves on http://localhost:8080
 ```
 
@@ -158,46 +162,42 @@ npm run dev              # serves on http://localhost:5173
 curl http://localhost:8080/api/v1/health
 ```
 
-Expected: `{"status":"ok","db":"ok","model_loaded":true}`
-
 ---
 
 ## Scope boundaries
 
-Stated up front so the project is judged on what it claims, not on what it does not attempt.
-
 **In scope**
 - C++ input only
-- Structured problem metadata (a form), not free-text natural language understanding
-- A catalog of roughly 15 to 20 classic problem patterns for oracle-based verification
-- One trained model: algorithm classification from AST and CFG features
-- Template-based code transformation from a fixed optimization catalog
-- Static findings from CFG and dataflow analysis (unreachable code, unused variables, suspicious loop bounds, overflow-prone arithmetic)
+- Structured problem metadata, not free-text natural language understanding
+- A catalog of classic problem patterns for oracle-based verification: pair sum, sorted search, range sum, Fibonacci, k smallest elements
+- One trained model: algorithm classification from AST/CFG features, informational only
+- Four verified, template-based optimizer passes
+- Static findings from AST and CFG analysis (overflow-prone arithmetic, unreachable code, unused variables)
 
 **Out of scope**
 - Natural language problem parsing
-- Free-form neural code generation
+- Free-form neural code generation — the optimizer only recognizes and rewrites known patterns, it does not invent new algorithms
 - Multi-file projects, external libraries beyond the STL
 - Proving correctness. Differential testing finds counterexamples; it never proves their absence
 - Languages other than C++
 
-**Stretch goals, only if week 3 finishes early**
-- Graph neural network over the AST instead of the feature-vector MLP
-- A second model for complexity class prediction, cross-checked against the deterministic engine
+**Known gaps, stated plainly**
+- Only four of the five catalog problems have an implemented optimizer pass; k smallest elements is differentially tested but has no rewrite rule yet
+- The server does not yet gracefully shut down (`pure virtual method called` on interrupt); this does not affect normal operation
+- Job history is kept in memory only and is lost on server restart
 
 ---
 
 ## Honesty policy for results
 
-Three rules the whole team follows when writing the report and the UI:
-
-1. Model outputs are always shown as a ranked list with probabilities, never as a single confident label.
+1. Model outputs are always shown as a ranked list with probabilities, never as a single confident label, and are clearly distinguished from the rule-derived complexity result.
 2. A bug is only reported as a bug when a counterexample exists. Anything else is labelled "suspicious pattern".
-3. Speedups are measured on real runs, never quoted from complexity classes alone.
+3. Speedups are measured on real runs against the user's own original code, never quoted from complexity classes alone.
+4. An optimized rewrite is never shown unless it has compiled and matched the reference answer on every generated test.
 
 ---
 
 ## Documentation
 
-- [`docs/architecture.md`](docs/architecture.md): layers, module responsibilities, interface contracts, database schema, ML design, DSA mapping, risks
-- [`docs/api-spec.md`](docs/api-spec.md): every endpoint, request and response shape, WebSocket protocol, error codes
+- [`docs/architecture.md`](docs/architecture.md)
+- [`docs/api-spec.md`](docs/api-spec.md)
