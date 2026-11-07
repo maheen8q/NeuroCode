@@ -16,7 +16,7 @@ export function useJob(id?: number) {
   const [error, setError] = useState<string | null>(null);
   const active = job && !isTerminal(job.status) ? job.job_id : undefined;
   const socket = useProgressSocket(active ?? (job?.type === 'train' ? job.job_id : undefined));
-  const live = job && socket.jobId === job.job_id ? socket : NO_LIVE;
+  const live = job && socket && socket.jobId === job.job_id ? socket : NO_LIVE;
 
   const refresh = useCallback(async () => {
     if (id === undefined || Number.isNaN(id)) return;

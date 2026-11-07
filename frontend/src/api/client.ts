@@ -5,7 +5,9 @@ import type {
 import { ApiError } from './ApiError';
 import { E } from './endpoints';
 import { mockHandle } from './mock';
-
+// The backend names a job's id `id`; the frontend types and pages use `job_id`. Fill it in once here
+// so every page and hook (live progress socket, links, cancel) gets a real id.
+const withJobId = <T extends { job_id?: number; id?: number }>(j: T): T => ({ ...j, job_id: j.job_id ?? j.id } as T);
 export { ApiError };
 export const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 const BASE = import.meta.env.VITE_API_BASE ?? '';
@@ -52,12 +54,13 @@ export const api = {
   },
   jobs: {
     create: (b: CreateJobRequest) => request<CreateJobResponse>('POST', E.jobs, b),
-    get: (id: number) => request<Job>('GET', E.job(id)),
-    list: (q: JobQuery) => {
+    get: async (id: number) => withJobId(await request<Job>('GET', E.job(id))),
+    list: async (q: JobQuery) => {
       const p = new URLSearchParams({ limit: String(q.limit), offset: String(q.offset) });
       if (q.type) p.set('type', q.type);
       if (q.status) p.set('status', q.status);
-      return request<JobPage>('GET', `${E.jobs}?${p}`);
+            const page = await request<JobPage>('GET', `${E.jobs}?${p}`);
+      return { ...page, jobs: page.jobs.map(withJobId) };
     },
     cancel: (id: number) => request<void>('DELETE', E.job(id)),
   },
