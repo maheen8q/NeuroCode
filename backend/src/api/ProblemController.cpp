@@ -16,7 +16,9 @@ nlohmann::json toJson(const Problem& p) {
             {"operation", p.operation},
             {"max_n", p.max_n},
             {"optimal_time", p.optimal_time},
-            {"description", p.description}};
+            {"description", p.description},
+            {"category", p.category},
+            {"difficulty", p.difficulty}};
 }
 
 }  // namespace

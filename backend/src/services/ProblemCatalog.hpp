@@ -17,6 +17,8 @@ struct Problem {
     long long max_n = 0;
     std::string optimal_time;
     std::string description;
+    std::string category;      // "Arrays", "Searching", "Dynamic Programming"
+    std::string difficulty;    // "Easy", "Medium", "Hard"
 };
 
 class ProblemCatalog {

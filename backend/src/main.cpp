@@ -10,6 +10,7 @@
 #include <nlohmann/json.hpp>
 
 #include "ml/IPredictor.hpp"
+#include "ml/FeatureExtractor.hpp"
 #include "storage/Database.hpp"
 #include "storage/JobRepo.hpp"
 #include "storage/ModelRepo.hpp"
@@ -88,6 +89,9 @@ int main(int argc, char** argv) {
         // 4. Models + predictor.
         int n_models = models.syncFromDisk(models_dir);
         auto predictor = nc::makePredictor(models_dir);
+        predictor->setFeatureExtractor([](const std::string& ast_json, const std::string&) {
+            return nc::computeFeaturesFromJson(ast_json);
+        });
         const std::string loaded_version = predictor->activeModelVersion();
         if (!loaded_version.empty()) models.setActiveVersion(loaded_version);
         const bool model_loaded = !loaded_version.empty() && models.findByVersion(loaded_version).has_value();

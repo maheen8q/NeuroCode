@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include "engine/IEngine.hpp" // for AlgorithmGuess
-
+#include <functional>
 namespace nc
 {
 
@@ -13,6 +13,9 @@ namespace nc
     class IPredictor
     {
     public:
+        using FeatureFn = std::function<std::vector<float>(const std::string& ast_json,
+                                                            const std::string& cfg_json)>;
+        virtual void setFeatureExtractor(FeatureFn) {}
         virtual ~IPredictor() = default;
 
         virtual std::vector<float> extractFeatures(const std::string &ast_json,
