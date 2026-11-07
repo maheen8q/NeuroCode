@@ -22,7 +22,7 @@ public:
     std::string activeModelVersion() const override;
 
     // T4 C++ FeatureExtractor goes in here. Tb tk extractFeatures returns zeros.
-    void setFeatureExtractor(FeatureFn fn) { feature_fn_ = std::move(fn); }
+        void setFeatureExtractor(FeatureFn fn) override { feature_fn_ = std::move(fn); }
 
 private:
     MLP model_{nullptr};

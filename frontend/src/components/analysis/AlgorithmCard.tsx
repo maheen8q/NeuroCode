@@ -16,23 +16,23 @@ export default function AlgorithmCard({ algorithms, lowConfidence, modelVersion 
       {algorithms.length === 0 ? (
         <p className="text-mute">The model returned no prediction for this code.</p>
       ) : (
-        <div className="flex items-center gap-6">
-          <div className="relative shrink-0" style={{ width: 140, height: 140 }} role="img" aria-label={`Top prediction: ${humanize(top.label)} at ${fmtPct(top.probability, 1)}`}>
+        <div className="flex flex-col items-center">
+          <div className="relative" style={{ width: 260, height: 260 }} role="img" aria-label={`Top prediction: ${humanize(top.label)} at ${fmtPct(top.probability, 1)}`}>
             <ResponsiveContainer>
               <PieChart>
-                <Pie data={data} dataKey="value" nameKey="name" innerRadius={44} outerRadius={64} startAngle={90} endAngle={-270} stroke="none" isAnimationActive={false}>
+                <Pie data={data} dataKey="value" nameKey="name" innerRadius={88} outerRadius={126} startAngle={90} endAngle={-270} stroke="none" isAnimationActive={false}>
                   {data.map((d, i) => <Cell key={d.name} fill={COLORS[i] ?? COLORS[COLORS.length - 1]} />)}
                 </Pie>
                 <Tooltip formatter={(v: number) => fmtPct(v, 1)} contentStyle={{ background: 'rgb(var(--panel))', border: '1px solid rgb(var(--line))', borderRadius: 8 }} />
               </PieChart>
             </ResponsiveContainer>
             <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="text-xl font-bold leading-tight">{fmtPct(top.probability, 0)}</span>
-              <span className="text-[11px] leading-tight text-mute">{humanize(top.label)}</span>
+              <span className="text-4xl font-bold leading-tight">{fmtPct(top.probability, 0)}</span>
+              <span className="mt-1 text-sm text-mute">{humanize(top.label)}</span>
             </div>
           </div>
 
-          <ul className="flex-1 space-y-2.5">
+          <ul className="mt-6 w-full max-w-xs space-y-2.5">
             {algorithms.map((a, i) => (
               <li key={a.label} className="flex items-center gap-2.5">
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: COLORS[i] ?? COLORS[COLORS.length - 1] }} />

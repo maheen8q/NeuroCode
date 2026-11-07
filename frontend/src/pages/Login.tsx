@@ -3,6 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import { Button, ErrorBox, Segmented } from '../components/common/ui';
 import { LogoMark } from '../components/layout/Logo';
 import { errorMessage } from '../lib/errors';
+import OptimizationsChart from '../components/landing/OptimizationsChart';
 
 export default function Login({ onReplay }: { onReplay?: () => void }) {
   const { login, signup } = useAuth();
@@ -30,6 +31,9 @@ export default function Login({ onReplay }: { onReplay?: () => void }) {
               <li key={t} className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" /><span>{t}</span></li>
             ))}
           </ul>
+          <div className="mt-8 max-w-md">
+            <OptimizationsChart />
+          </div>
         </div>
         <p className="max-w-md text-sm text-mute">Testing finds counterexamples. It does not prove that code is correct.</p>
       </div>

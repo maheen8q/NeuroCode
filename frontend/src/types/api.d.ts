@@ -22,7 +22,7 @@ export interface Health {
 }
 
 export interface ProblemSpec { input_type: string; output_type: string; operation: string; max_n: number }
-export interface Problem extends ProblemSpec { id: string; title: string; optimal_time: string; statement?: string }
+export interface Problem extends ProblemSpec { id: string; title: string; optimal_time: string; statement?: string; category?: string; difficulty?: string }
 
 export interface AlgorithmGuess { label: string; probability: number }
 export interface Complexity { time: string; space: string; derivation: string[] }
