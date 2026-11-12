@@ -7,6 +7,12 @@ A user submits a C++ solution plus a short structured description of the problem
 It is not a linter and not a chatbot wrapper. Every layer is built in this repository, and nothing is shown to the user until it has actually been checked.
 
 ---
+## 🚀 Live Demo
+
+- **App:** [https://neurocode-xi.vercel.app/](https://your-app.vercel.app)
+- **API:** [https://neurocode-e8na.onrender.com/api/v1/health](https://neurocode-e8na.onrender.com/api/v1/health)
+
+> Note: the backend runs on Render's free tier, so the first request after idle can take ~50 seconds.
 
 ## What it does, concretely
 
