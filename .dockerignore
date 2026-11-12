@@ -1,0 +1,7 @@
+**/node_modules
+backend/build
+frontend/dist
+**/.vite
+backend/data/*.db-shm
+backend/data/*.db-wal
+.git
