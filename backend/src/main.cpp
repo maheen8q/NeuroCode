@@ -96,6 +96,7 @@ int main(int argc, char** argv) {
             std::fprintf(stderr, "neurocode: stub auth, user '%s' (id %lld)\n", u.username.c_str(), (long long)u.id);
         }
         static nc::AuthService authService(
+            users,
             auth.value("username", std::string("demo")),
             auth.value("token", std::string("dev-token-change-me")));
         nc::ctx().auth = &authService;
