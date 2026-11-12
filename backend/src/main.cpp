@@ -6,6 +6,7 @@
 #include <fstream>
 #include <memory>
 #include <string>
+#include <cstdlib>
 
 #include <nlohmann/json.hpp>
 
@@ -74,7 +75,14 @@ int main(int argc, char** argv) {
     const json server = section(cfg, "server"), dbc = section(cfg, "db"), auth = section(cfg, "auth");
     const json jobs_cfg = section(cfg, "jobs");
     const std::string models_dir = cfg.value("models_dir", std::string("models"));
-    const std::string cors_origin = server.value("cors_origin", std::string("http://localhost:5173"));
+    const char* env_cors = std::getenv("CORS_ORIGIN");
+    const std::string cors_origin = env_cors ? env_cors
+         : server.value("cors_origin", std::string("http://localhost:5173"));
+
+    const char* env_port = std::getenv("PORT");
+    const int listen_port = env_port ? std::atoi(env_port) : server.value("port", 8080);
+    const std::string listen_host = env_port ? "0.0.0.0"
+        : server.value("host", std::string("127.0.0.1"));
 
     try {
         // 1. Database.
@@ -142,7 +150,7 @@ int main(int argc, char** argv) {
         // 6. HTTP.
         auto& app = drogon::app();
         app.setThreadNum(server.value("http_threads", 2));
-        app.addListener(server.value("host", std::string("127.0.0.1")), server.value("port", 8080));
+        app.addListener(listen_host, listen_port);
 
         app.registerPreRoutingAdvice([cors_origin](const drogon::HttpRequestPtr& req,
                                                    drogon::AdviceCallback&& cb,
@@ -179,8 +187,7 @@ int main(int argc, char** argv) {
             },
             {drogon::Get});
 
-        std::fprintf(stderr, "neurocode: listening on http://%s:%d\n",
-                     server.value("host", std::string("127.0.0.1")).c_str(), server.value("port", 8080));
+        std::fprintf(stderr, "neurocode: listening on http://%s:%d\n", listen_host.c_str(), listen_port);
         app.run();
     } catch (const std::exception& e) {
         std::fprintf(stderr, "neurocode: fatal: %s\n", e.what());
