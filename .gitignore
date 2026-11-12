@@ -33,3 +33,8 @@ backend/build/*.db-shm
 *.db-wal
 .vite/
 how 8911849
+logs/
+logs/
+logs/
+logs/
+logs/

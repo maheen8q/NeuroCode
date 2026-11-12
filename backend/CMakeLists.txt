@@ -46,6 +46,11 @@ if(NC_BUILD_SERVER)
   target_include_directories(neurocode PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
   target_link_libraries(neurocode PRIVATE nc_storage Drogon::Drogon "${TORCH_LIBRARIES}")
 
+  # Real account passwords (AuthService): Argon2 hashing via libsodium.
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(SODIUM REQUIRED IMPORTED_TARGET libsodium)
+  target_link_libraries(neurocode PRIVATE PkgConfig::SODIUM)
+
   # libclang is needed once T4's engine/parse/ files are in the tree.
   file(GLOB_RECURSE NC_ENGINE_PARSE CONFIGURE_DEPENDS src/engine/parse/*.cpp)
   if(NC_ENGINE_PARSE)
